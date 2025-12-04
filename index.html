@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anu Visuals - Video Editor • Filmmaker • Designer</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+</head>
+<body>
+    <!-- Particle Background Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="nav-container">
+            <div class="nav-bend"></div>
+            <div class="nav-face"></div>
+            <div class="nav-edge"></div>
+            <div class="nav-content">
+                <div class="logo">
+                    <span class="logo-name">Anu Visuals</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#home" class="nav-link glass-button">Home</a>
+                    <a href="#work" class="nav-link glass-button">Work</a>
+                    <a href="#about" class="nav-link glass-button">About</a>
+                    <a href="#contact" class="nav-link glass-button">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-container">
+                <div class="hero-glass glass-card">
+                    <div class="glass-bend"></div>
+                    <div class="glass-face"></div>
+                    <div class="glass-edge"></div>
+                    <div class="hero-content">
+                        <div class="hero-image-container">
+                            <!-- Replace with your actual image path -->
+                            <div class="hero-image">
+                                <img src="images/profile-picture.jpg" alt="Anu Visuals" class="hero-face">
+                                <div class="image-overlay"></div>
+                            </div>
+                        </div>
+                        <div class="hero-text">
+                            <div class="hero-tagline">
+                                <span class="welcome-text">welcome to</span>
+                                <h1 class="hero-title cursive">Anu Visuals</h1>
+                            </div>
+                            <h2 class="hero-subtitle">Video Editor • Filmmaker • Designer</h2>
+                            <p class="hero-description">Visual storytelling across mediums, bringing cinematic quality to every project from Akkikavu, Thrissur.</p>
+                            <div class="hero-buttons">
+                                <a href="#work" class="glass-button primary">
+                                    <i class="fas fa-eye"></i> View My Work
+                                </a>
+                                <a href="#contact" class="glass-button secondary">
+                                    <i class="fas fa-envelope"></i> Get In Touch
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- My Craft Section -->
+        <section id="work" class="craft-section">
+            <div class="section-title glass-card">
+                <div class="glass-bend"></div>
+                <div class="glass-face"></div>
+                <div class="glass-edge"></div>
+                <h2>My Craft</h2>
+                <p>Visual storytelling across mediums</p>
+            </div>
+
+            <div class="craft-grid">
+                <!-- Shoots Card -->
+                <div class="craft-card glass-card">
+                    <div class="glass-bend"></div>
+                    <div class="glass-face"></div>
+                    <div class="glass-edge"></div>
+                    <div class="craft-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Shoots</h3>
+                    <p>Short films, photography & cinematography work. From concept to final cut, capturing moments that tell compelling stories.</p>
+                    <a href="#" class="glass-button small">
+                        <i class="fas fa-images"></i> View Gallery
+                    </a>
+                </div>
+
+                <!-- Edits Card -->
+                <div class="craft-card glass-card">
+                    <div class="glass-bend"></div>
+                    <div class="glass-face"></div>
+                    <div class="glass-edge"></div>
+                    <div class="craft-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3>Edits</h3>
+                    <p>Reels, wedding edits, YouTube content, and promotional videos. Transforming raw footage into engaging visual narratives.</p>
+                    <a href="#" class="glass-button small">
+                        <i class="fas fa-play-circle"></i> View Gallery
+                    </a>
+                </div>
+
+                <!-- Design Card -->
+                <div class="craft-card glass-card">
+                    <div class="glass-bend"></div>
+                    <div class="glass-face"></div>
+                    <div class="glass-edge"></div>
+                    <div class="craft-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Design</h3>
+                    <p>Posters, branding, social media designs, and visual content. Creating compelling visuals that communicate and captivate.</p>
+                    <a href="#" class="glass-button small">
+                        <i class="fas fa-palette"></i> View Gallery
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="about-container glass-card large">
+                <div class="glass-bend"></div>
+                <div class="glass-face"></div>
+                <div class="glass-edge"></div>
+                <div class="about-content">
+                    <div class="about-header">
+                        <h2>Hi, I'm Anas Asif</h2>
+                        <p class="about-tagline">A passionate visual creator from Akkikavu, Thrissur</p>
+                    </div>
+                    
+                    <div class="about-text">
+                        <p>With 5+ years of professional video editing experience, my journey in visual storytelling began with a deep love for cinema, which evolved into creating short films, photography, and design work.</p>
+                        
+                        <p>I specialize in DaVinci Resolve for color grading and editing, creating compelling visual narratives for restaurants, YouTubers, local businesses, wedding celebrations, reels, and trendy informative short-form content ads. From reel edits to complete branding packages, I bring stories to life through motion and design.</p>
+                        
+                        <p>My work bridges commercial needs with cinematic quality—whether it's a restaurant promotional video, wedding highlight film, or brand identity for local shops in Thrissur. Every project is an opportunity to craft something meaningful and visually striking.</p>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="skills-section">
+                        <h3>My Skills</h3>
+                        <div class="skills-grid">
+                            <div class="skill-tag glass-button small">
+                                <i class="fas fa-film"></i> DaVinci Resolve
+                            </div>
+                            <div class="skill-tag glass-button small">
+                                <i class="fas fa-camera"></i> Cinematography
+                            </div>
+                            <div class="skill-tag glass-button small">
+                                <i class="fas fa-palette"></i> Color Grading
+                            </div>
+                            <div class="skill-tag glass-button small">
+                                <i class="fas fa-magic"></i> Motion Graphics
+                            </div>
+                            <div class="skill-tag glass-button small">
+                                <i class="fas fa-desktop"></i> Adobe Creative Suite
+                            </div>
+                            <div class="skill-tag glass-button small">
+                                <i class="fas fa-image"></i> Photo Editing
+                            </div>
+                            <div class="skill-tag glass-button small">
+                                <i class="fas fa-book-open"></i> Visual Storytelling
+                            </div>
+                            <div class="skill-tag glass-button small">
+                                <i class="fas fa-video"></i> Video Production
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="experience-section">
+            <div class="section-title glass-card">
+                <div class="glass-bend"></div>
+                <div class="glass-face"></div>
+                <div class="glass-edge"></div>
+                <h2>Experience Timeline</h2>
+                <p>My journey in visual creation</p>
+            </div>
+
+            <div class="timeline">
+                <!-- 2025 -->
+                <div class="timeline-item glass-card">
+                    <div class="glass-bend"></div>
+                    <div class="glass-face"></div>
+                    <div class="glass-edge"></div>
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-content">
+                        <h3>Video Editor & Graphic Designer</h3>
+                        <p class="timeline-location">Oggy Studio Perumbilavu</p>
+                        <p>Currently working as a professional video editor and graphic designer, creating compelling visual content for various clients.</p>
+                    </div>
+                </div>
+
+                <!-- 2023-2024 -->
+                <div class="timeline-item glass-card">
+                    <div class="glass-bend"></div>
+                    <div class="glass-face"></div>
+                    <div class="glass-edge"></div>
+                    <div class="timeline-year">2023-2024</div>
+                    <div class="timeline-content">
+                        <h3>Freelance Creative Work</h3>
+                        <p class="timeline-location">Local Companies in Thrissur</p>
+                        <p>Freelance work for local companies: shooting ads, editing them, designing flyers, posters, and advertisements.</p>
+                    </div>
+                </div>
+
+                <!-- 2020-2022 -->
+                <div class="timeline-item glass-card">
+                    <div class="glass-bend"></div>
+                    <div class="glass-face"></div>
+                    <div class="glass-edge"></div>
+                    <div class="timeline-year">2020-2022</div>
+                    <div class="timeline-content">
+                        <h3>Skill Development Phase</h3>
+                        <p class="timeline-location">Self-Learning & Personal Projects</p>
+                        <p>Video editing for friends and personal projects while learning Photoshop, Movavi, Filmora, HitFilm, Premiere Pro, and other editing software.</p>
+                    </div>
+                </div>
+
+                <!-- 2019 -->
+                <div class="timeline-item glass-card">
+                    <div class="glass-bend"></div>
+                    <div class="glass-face"></div>
+                    <div class="glass-edge"></div>
+                    <div class="timeline-year">2019</div>
+                    <div class="timeline-content">
+                        <h3>Animation Beginnings</h3>
+                        <p class="timeline-location">Self-Taught Journey</p>
+                        <p>Started learning animation and motion graphics from my phone, beginning my journey into visual storytelling.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="contact-container glass-card large">
+                <div class="glass-bend"></div>
+                    <div class="glass-face"></div>
+                    <div class="glass-edge"></div>
+                    <div class="contact-content">
+                    <div class="contact-header">
+                        <h2>Let's Create Together</h2>
+                        <p class="contact-subtitle">Have a project in mind? Get in touch.</p>
+                    </div>
+
+                    <div class="contact-info">
+                        <div class="contact-item glass-card">
+                            <div class="glass-bend"></div>
+                            <div class="glass-face"></div>
+                            <div class="glass-edge"></div>
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3>Direct Contact</h3>
+                            <p>Ready to discuss your project? Send me a message directly.</p>
+                            <a href="mailto:hello@anuvisuals.com" class="glass-button">
+                                <i class="fas fa-paper-plane"></i> Send Email
+                            </a>
+                        </div>
+
+                        <div class="contact-item glass-card">
+                            <div class="glass-bend"></div>
+                            <div class="glass-face"></div>
+                            <div class="glass-edge"></div>
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3>Phone</h3>
+                            <p>Available for calls during business hours.</p>
+                            <a href="tel:+911234567890" class="glass-button">
+                                <i class="fas fa-phone-alt"></i> Call Now
+                            </a>
+                        </div>
+
+                        <div class="contact-item glass-card">
+                            <div class="glass-bend"></div>
+                            <div class="glass-face"></div>
+                            <div class="glass-edge"></div>
+                            <div class="contact-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <h3>WhatsApp</h3>
+                            <p>Quick chat about your project requirements.</p>
+                            <a href="https://wa.me/911234567890" class="glass-button">
+                                <i class="fab fa-whatsapp"></i> Message on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Links (Liquid Glass Menu) -->
+        <div class="liquid-glass-menu">
+            <div class="liquid-glass">
+                <div class="liquid-glass--bend"></div>
+                <div class="liquid-glass--face"></div>
+                <div class="liquid-glass--edge"></div>
+                <div class="liquid-glass__menus">
+                    <a class="liquid-glass__link link-instagram" href="#" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="liquid-glass__link link-youtube" href="#" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a class="liquid-glass__link link-behance" href="#" target="_blank">
+                        <i class="fab fa-behance"></i>
+                    </a>
+                    <a class="liquid-glass__link link-linkedin" href="#" target="_blank">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass-footer">
+        <div class="footer-content glass-card">
+            <div class="glass-bend"></div>
+            <div class="glass-face"></div>
+            <div class="glass-edge"></div>
+            <div class="footer-text">
+                <p>&copy; 2025 Anu Visuals. All rights reserved.</p>
+                <p>Video Editor & Graphic Designer from Akkikavu, Thrissur</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Hidden SVG Filter -->
+    <svg style="display: none" xmlns="http://www.w3.org/2000/svg">
+        <filter id="glass-blur" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
+            <feTurbulence type="fractalNoise" baseFrequency="0.003 0.007" numOctaves="1" result="turbulence" />
+            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="200" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+
+    <script src="script.js"></script>
+</body>
+</html>
