@@ -1173,3 +1173,8 @@ img, video {
         font-size: 1rem;
     }
 }
+
+/* Add to your CSS */
+.glass-card {
+    opacity: 1 !important; /* Force visibility */
+}
