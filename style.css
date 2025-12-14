@@ -578,6 +578,12 @@ body::before {
     justify-content: center;
     padding: 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    /* Ensure it stays a perfect circle */
+    aspect-ratio: 1 / 1;
+    min-width: auto !important;
+    min-height: auto !important;
+    max-width: 50px;
+    max-height: 50px;
 }
 
 .back-to-top.visible {
@@ -593,15 +599,21 @@ body::before {
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Mobile adjustments for Back to Top */
+/* Mobile adjustments for Back to Top - UPDATED */
 @media (max-width: 768px) {
     .back-to-top {
         bottom: 20px;
         right: 20px;
-        width: 45px;
-        height: 45px;
+        width: 45px !important;
+        height: 45px !important;
         font-size: 1rem;
         opacity: 0.7;
+        /* Ensure it stays circular */
+        border-radius: 50% !important;
+        max-width: 45px !important;
+        max-height: 45px !important;
+        min-width: 45px !important;
+        min-height: 45px !important;
     }
     
     .back-to-top:hover {
@@ -613,8 +625,12 @@ body::before {
     .back-to-top {
         bottom: 15px;
         right: 15px;
-        width: 40px;
-        height: 40px;
+        width: 40px !important;
+        height: 40px !important;
+        max-width: 40px !important;
+        max-height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
     }
 }
 
@@ -1178,3 +1194,4 @@ img, video {
 .glass-card {
     opacity: 1 !important; /* Force visibility */
 }
+
