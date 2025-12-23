@@ -1,415 +1,9 @@
 // Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(Draggable, ScrollTrigger);
 
-// YouTube Player Management System
-class YouTubePlayerManager {
-    constructor() {
-        this.players = {}; // Store YouTube player instances
-        this.playerStates = {}; // Store player states
-        this.pairs = {}; // Store video pairs
-        this.isPageVisible = true;
-        this.observer = null;
-        
-        // YouTube API ready handler
-        window.onYouTubeIframeAPIReady = () => this.setupPlayers();
-        
-        // Load YouTube API if not already loaded
-        if (typeof YT === 'undefined') {
-            console.log('Loading YouTube API...');
-            this.loadYouTubeAPI();
-        } else {
-            this.setupPlayers();
-        }
-    }
-    
-    loadYouTubeAPI() {
-        // Create script tag for YouTube API
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    }
-    
-    setupPlayers() {
-        console.log('Setting up YouTube players...');
-        
-        // Find all video containers
-        const videoContainers = document.querySelectorAll('.video-container[data-video-id]');
-        
-        if (videoContainers.length === 0) {
-            console.error('No video containers found');
-            return;
-        }
-        
-        // Group by pairs
-        videoContainers.forEach(container => {
-            const pairId = container.getAttribute('data-pair');
-            const videoId = container.getAttribute('data-video-id');
-            const playerElement = container.querySelector('.youtube-player');
-            
-            if (!playerElement) {
-                console.error('No youtube-player element found', container);
-                return;
-            }
-            
-            const playerId = playerElement.id;
-            
-            if (!this.pairs[pairId]) {
-                this.pairs[pairId] = [];
-            }
-            
-            // Store player info first
-            this.playerStates[playerId] = {
-                container: container,
-                pairId: pairId,
-                videoId: videoId,
-                isPlaying: false,
-                isReady: false,
-                player: null
-            };
-            
-            this.pairs[pairId].push(playerId);
-            
-            // Create YouTube player
-            this.createYouTubePlayer(playerId, videoId, pairId, playerElement);
-            
-            // Add loading indicator
-            container.classList.add('loading');
-            
-            // Add YouTube branding
-            const youtubeBrand = document.createElement('div');
-            youtubeBrand.className = 'youtube-branding';
-            youtubeBrand.innerHTML = '<i class="fab fa-youtube"></i> YouTube';
-            container.appendChild(youtubeBrand);
-            
-            // Add autoplay indicator
-            const autoplayBadge = document.createElement('div');
-            autoplayBadge.className = 'autoplay-indicator';
-            autoplayBadge.innerHTML = '<i class="fas fa-play-circle"></i> Auto-play';
-            container.appendChild(autoplayBadge);
-        });
-        
-        // Setup Intersection Observer
-        this.setupIntersectionObserver();
-        
-        // Setup page visibility listener
-        this.setupPageVisibility();
-        
-        // Setup click handlers
-        this.setupClickHandlers();
-    }
-    
-    createYouTubePlayer(playerId, videoId, pairId, element) {
-        // YouTube player parameters
-        const playerVars = {
-            'autoplay': 0,
-            'mute': 1, // Required for autoplay on most browsers
-            'controls': 0, // Hide YouTube controls
-            'showinfo': 0,
-            'modestbranding': 1,
-            'rel': 0,
-            'playsinline': 1, // Prevent fullscreen on iOS
-            'enablejsapi': 1,
-            'origin': window.location.origin,
-            'widget_referrer': window.location.href
-        };
-        
-        // Create the player
-        this.players[playerId] = new YT.Player(element, {
-            videoId: videoId,
-            playerVars: playerVars,
-            events: {
-                'onReady': (event) => this.onPlayerReady(event, playerId, pairId),
-                'onStateChange': (event) => this.onPlayerStateChange(event, playerId, pairId),
-                'onError': (event) => this.onPlayerError(event, playerId)
-            }
-        });
-    }
-    
-    onPlayerReady(event, playerId, pairId) {
-        console.log(`Player ${playerId} ready`);
-        const state = this.playerStates[playerId];
-        state.isReady = true;
-        state.container.classList.remove('loading');
-        
-        // Set volume to 0 (muted) for autoplay compliance
-        event.target.setVolume(0);
-        
-        // Add play button overlay for better UX
-        this.addPlayOverlay(state.container, pairId);
-    }
-    
-    onPlayerStateChange(event, playerId, pairId) {
-        const state = this.playerStates[playerId];
-        const playerState = event.data;
-        
-        // Update playing state
-        if (playerState === YT.PlayerState.PLAYING) {
-            state.isPlaying = true;
-            state.container.classList.add('playing');
-            state.container.classList.remove('paused');
-        } else if (playerState === YT.PlayerState.PAUSED) {
-            state.isPlaying = false;
-            state.container.classList.remove('playing');
-            state.container.classList.add('paused');
-        }
-        
-        // Update play button icon
-        const playButton = state.container.querySelector('.play-pause-btn');
-        if (playButton) {
-            playButton.innerHTML = state.isPlaying ? 
-                '<i class="fas fa-pause"></i>' : 
-                '<i class="fas fa-play"></i>';
-        }
-    }
-    
-    onPlayerError(event, playerId) {
-        console.error(`YouTube player error: ${event.data}`, this.playerStates[playerId]);
-        const state = this.playerStates[playerId];
-        state.container.classList.remove('loading');
-        
-        // Show error message
-        const errorMsg = document.createElement('div');
-        errorMsg.className = 'error-message';
-        errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Video unavailable';
-        errorMsg.style.cssText = `
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            background: rgba(0,0,0,0.7);
-            padding: 10px 20px;
-            border-radius: 10px;
-            z-index: 10;
-        `;
-        state.container.appendChild(errorMsg);
-    }
-    
-    addPlayOverlay(container, pairId) {
-        // Create play overlay
-        const overlay = document.createElement('div');
-        overlay.className = 'youtube-play-overlay';
-        overlay.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 2;
-            cursor: pointer;
-            border-radius: 14px;
-        `;
-        
-        const playButton = document.createElement('div');
-        playButton.className = 'youtube-play-button';
-        playButton.style.cssText = `
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 0, 0, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        `;
-        playButton.innerHTML = '<i class="fas fa-play"></i>';
-        
-        overlay.appendChild(playButton);
-        container.appendChild(overlay);
-        
-        // Add hover effect
-        container.addEventListener('mouseenter', () => {
-            overlay.style.opacity = '1';
-        });
-        
-        container.addEventListener('mouseleave', () => {
-            overlay.style.opacity = '0';
-        });
-        
-        // Click to toggle play/pause
-        overlay.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.togglePair(pairId);
-        });
-    }
-    
-    setupIntersectionObserver() {
-        this.observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const container = entry.target;
-                const pairId = container.getAttribute('data-pair');
-                
-                if (entry.isIntersecting && this.isPageVisible) {
-                    // Play the pair
-                    this.playPair(pairId);
-                } else {
-                    // Pause the pair
-                    this.pausePair(pairId);
-                }
-            });
-        }, {
-            threshold: 0.7, // Play when 70% visible
-            rootMargin: '50px 0px 50px 0px' // Buffer zone
-        });
-        
-        // Observe all video containers
-        Object.values(this.playerStates).forEach(state => {
-            this.observer.observe(state.container);
-        });
-    }
-    
-    setupPageVisibility() {
-        document.addEventListener('visibilitychange', () => {
-            this.isPageVisible = !document.hidden;
-            
-            if (this.isPageVisible) {
-                // Resume pairs that should be playing
-                Object.keys(this.pairs).forEach(pairId => {
-                    const editRow = document.querySelector(`.edit-row[data-pair="${pairId}"]`);
-                    if (editRow && editRow.classList.contains('playing')) {
-                        this.playPair(pairId);
-                    }
-                });
-            } else {
-                // Pause all pairs
-                Object.keys(this.pairs).forEach(pairId => {
-                    this.pausePair(pairId);
-                });
-            }
-        });
-    }
-    
-    setupClickHandlers() {
-        // Add click handlers to video containers and play buttons
-        Object.values(this.playerStates).forEach(state => {
-            const container = state.container;
-            const pairId = state.pairId;
-            const playButton = container.querySelector('.play-pause-btn');
-            
-            // Click on container
-            container.addEventListener('click', (e) => {
-                if (!e.target.closest('.play-pause-btn') && !e.target.closest('.youtube-play-overlay')) {
-                    this.togglePair(pairId);
-                }
-            });
-            
-            // Click on play button
-            if (playButton) {
-                playButton.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    this.togglePair(pairId);
-                });
-            }
-        });
-    }
-    
-    playPair(pairId) {
-        const pair = this.pairs[pairId];
-        if (!pair) return;
-        
-        const editRow = document.querySelector(`.edit-row[data-pair="${pairId}"]`);
-        if (!editRow) return;
-        
-        editRow.classList.add('playing');
-        editRow.classList.remove('paused');
-        
-        // Play all players in the pair
-        pair.forEach(playerId => {
-            const player = this.players[playerId];
-            const state = this.playerStates[playerId];
-            
-            if (player && state.isReady && !state.isPlaying) {
-                try {
-                    player.playVideo();
-                    state.isPlaying = true;
-                    
-                    // Update play button icon
-                    const playButton = state.container.querySelector('.play-pause-btn');
-                    if (playButton) {
-                        playButton.innerHTML = '<i class="fas fa-pause"></i>';
-                    }
-                } catch (error) {
-                    console.error('Error playing video:', error);
-                }
-            }
-        });
-    }
-    
-    pausePair(pairId) {
-        const pair = this.pairs[pairId];
-        if (!pair) return;
-        
-        const editRow = document.querySelector(`.edit-row[data-pair="${pairId}"]`);
-        if (!editRow) return;
-        
-        editRow.classList.remove('playing');
-        editRow.classList.add('paused');
-        
-        // Pause all players in the pair
-        pair.forEach(playerId => {
-            const player = this.players[playerId];
-            const state = this.playerStates[playerId];
-            
-            if (player && state.isReady && state.isPlaying) {
-                try {
-                    player.pauseVideo();
-                    state.isPlaying = false;
-                    
-                    // Update play button icon
-                    const playButton = state.container.querySelector('.play-pause-btn');
-                    if (playButton) {
-                        playButton.innerHTML = '<i class="fas fa-play"></i>';
-                    }
-                } catch (error) {
-                    console.error('Error pausing video:', error);
-                }
-            }
-        });
-    }
-    
-    togglePair(pairId) {
-        const editRow = document.querySelector(`.edit-row[data-pair="${pairId}"]`);
-        
-        if (editRow.classList.contains('playing')) {
-            this.pausePair(pairId);
-        } else {
-            this.playPair(pairId);
-        }
-    }
-    
-    // Sync all pairs (in case they get out of sync)
-    syncAllPairs() {
-        Object.keys(this.pairs).forEach(pairId => {
-            const pair = this.pairs[pairId];
-            const players = pair.map(id => this.players[id]).filter(p => p);
-            
-            if (players.length > 1) {
-                // Get the current time from the first player
-                const firstPlayer = players[0];
-                const currentTime = firstPlayer.getCurrentTime();
-                
-                // Sync all players to the same time
-                players.forEach(player => {
-                    if (player !== firstPlayer) {
-                        player.seekTo(currentTime, true);
-                    }
-                });
-            }
-        });
-    }
-}
-
-// Particle System
+// ==========================================
+// PARTICLE SYSTEM FOR FLOWY ABSTRACT BACKGROUND
+// ==========================================
 class ParticleSystem {
     constructor() {
         this.canvas = document.getElementById('particle-canvas');
@@ -427,6 +21,7 @@ class ParticleSystem {
         this.init();
         this.animate();
         this.handleResize();
+        this.addEventListeners();
     }
     
     init() {
@@ -449,6 +44,7 @@ class ParticleSystem {
                 speedX: (Math.random() - 0.5) * 0.5,
                 speedY: (Math.random() - 0.5) * 0.5,
                 color: this.colors[Math.floor(Math.random() * this.colors.length)],
+                connections: [],
                 opacity: Math.random() * 0.5 + 0.3
             });
         }
@@ -524,155 +120,917 @@ class ParticleSystem {
     handleResize() {
         window.addEventListener('resize', () => {
             this.resizeCanvas();
+            // Reposition particles within new bounds
             this.particles.forEach(particle => {
                 particle.x = (particle.x / this.canvas.width) * window.innerWidth;
                 particle.y = (particle.y / this.canvas.height) * window.innerHeight;
             });
         });
     }
+    
+    addEventListeners() {
+        // Add subtle interaction
+        this.canvas.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            
+            this.particles.forEach(particle => {
+                const dx = mouseX - particle.x;
+                const dy = mouseY - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    const force = (100 - distance) / 100;
+                    particle.speedX -= (dx / distance) * force * 0.05;
+                    particle.speedY -= (dy / distance) * force * 0.05;
+                }
+            });
+        });
+    }
 }
 
-// Navigation and UI Interactions
-class NavigationManager {
+// ==========================================
+// SYNCED VIDEO PLAYER SYSTEM
+// ==========================================
+class SyncedVideoPlayer {
     constructor() {
-        this.nav = document.getElementById('main-nav');
-        this.backToTopBtn = document.getElementById('backToTop');
+        this.videoPairs = new Map(); // Store video pairs by sync group
+        this.observer = null;
+        this.threshold = 0.7;
+        this.isPageVisible = true;
+        this.syncTolerance = 0.1; // 100ms tolerance for sync
+        
         this.init();
     }
     
     init() {
-        // Nav scroll effect
-        window.addEventListener('scroll', () => this.handleNavScroll());
-        
-        // Back to top button
-        if (this.backToTopBtn) {
-            window.addEventListener('scroll', () => this.handleBackToTop());
-            this.backToTopBtn.addEventListener('click', () => this.scrollToTop());
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => this.setup());
+        } else {
+            this.setup();
         }
+    }
+    
+    setup() {
+        this.collectVideoPairs();
+        this.setupIntersectionObserver();
+        this.setupPageVisibility();
+        this.setupSyncEvents();
+        this.setupProgressBars();
+    }
+    
+    collectVideoPairs() {
+        // Find all video containers with sync groups
+        const videoContainers = document.querySelectorAll('.video-container[data-sync-group]');
         
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
-                const href = anchor.getAttribute('href');
-                if (href === '#') return;
+        // Group videos by their sync group
+        const groups = {};
+        
+        videoContainers.forEach(container => {
+            const groupId = container.getAttribute('data-sync-group');
+            if (!groups[groupId]) {
+                groups[groupId] = [];
+            }
+            
+            const video = container.querySelector('video');
+            if (!video) return;
+            
+            // Create autoplay badge
+            const badge = document.createElement('div');
+            badge.className = 'autoplay-badge';
+            badge.textContent = 'Auto-play';
+            container.appendChild(badge);
+            
+            // Create progress bar
+            const progressBar = document.createElement('div');
+            progressBar.className = 'video-progress';
+            progressBar.innerHTML = '<div class="video-progress-fill"></div>';
+            container.appendChild(progressBar);
+            
+            // Create sync indicator
+            const syncIndicator = document.createElement('div');
+            syncIndicator.className = 'sync-indicator';
+            syncIndicator.innerHTML = '<i class="fas fa-link"></i> Synced';
+            container.appendChild(syncIndicator);
+            
+            groups[groupId].push({
+                container,
+                video,
+                progressFill: progressBar.querySelector('.video-progress-fill'),
+                isPlaying: false,
+                shouldPlay: false,
+                isMaster: container.closest('.raw-video') !== null, // Raw video as master
+                isSyncing: false
+            });
+        });
+        
+        // Store video pairs
+        Object.entries(groups).forEach(([groupId, videos]) => {
+            this.videoPairs.set(groupId, videos);
+            
+            videos.forEach(videoData => {
+                const { video } = videoData;
                 
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                // Set video attributes
+                video.muted = true;
+                video.loop = true;
+                
+                // Reset videos to start
+                video.currentTime = 0;
+                
+                // Metadata loaded
+                video.addEventListener('loadedmetadata', () => {
+                    // Ensure all videos in group have same duration
+                    const group = this.videoPairs.get(groupId);
+                    if (group) {
+                        const maxDuration = Math.max(...group.map(v => v.video.duration));
+                        group.forEach(v => {
+                            if (v.video.duration < maxDuration) {
+                                // Video is shorter, we'll handle looping differently
+                                v.isShorter = true;
+                            }
+                        });
+                    }
+                });
+                
+                // Time update for progress bar and sync
+                video.addEventListener('timeupdate', () => {
+                    const group = this.videoPairs.get(groupId);
+                    if (!group) return;
                     
-                    // Update URL without scrolling
-                    history.pushState(null, null, href);
+                    const master = group.find(v => v.isMaster);
+                    if (!master) return;
+                    
+                    // If this is not the master, sync to master's time
+                    if (videoData !== master && !videoData.isSyncing) {
+                        const timeDiff = Math.abs(video.currentTime - master.video.currentTime);
+                        if (timeDiff > this.syncTolerance) {
+                            videoData.isSyncing = true;
+                            video.currentTime = master.video.currentTime % video.duration;
+                            setTimeout(() => {
+                                videoData.isSyncing = false;
+                            }, 100);
+                        }
+                    }
+                    
+                    // Update progress bar
+                    if (videoData.progressFill) {
+                        const progress = (video.currentTime / video.duration) * 100;
+                        videoData.progressFill.style.width = `${progress}%`;
+                    }
+                });
+                
+                // Handle video end - loop
+                video.addEventListener('ended', () => {
+                    video.currentTime = 0;
+                    video.play();
+                });
+                
+                // Loading state
+                video.addEventListener('waiting', () => {
+                    videoData.container.classList.add('loading');
+                });
+                
+                video.addEventListener('canplay', () => {
+                    videoData.container.classList.remove('loading');
+                });
+            });
+        });
+    }
+    
+    setupIntersectionObserver() {
+        const options = {
+            threshold: this.threshold,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const container = entry.target;
+                const groupId = container.getAttribute('data-sync-group');
+                const pair = this.videoPairs.get(groupId);
+                if (!pair) return;
+                
+                if (entry.isIntersecting && this.isPageVisible) {
+                    // All videos in the pair should play
+                    pair.forEach(videoData => {
+                        videoData.shouldPlay = true;
+                    });
+                    this.playVideoPair(pair);
+                } else {
+                    // All videos in the pair should pause
+                    pair.forEach(videoData => {
+                        videoData.shouldPlay = false;
+                    });
+                    this.pauseVideoPair(pair);
+                }
+            });
+        }, options);
+        
+        // Observe all video containers
+        this.videoPairs.forEach((pair) => {
+            pair.forEach(videoData => {
+                this.observer.observe(videoData.container);
+            });
+        });
+    }
+    
+    setupPageVisibility() {
+        document.addEventListener('visibilitychange', () => {
+            this.isPageVisible = !document.hidden;
+            
+            if (this.isPageVisible) {
+                // Resume video pairs that should be playing
+                this.videoPairs.forEach(pair => {
+                    if (pair.some(v => v.shouldPlay)) {
+                        this.playVideoPair(pair);
+                    }
+                });
+            } else {
+                // Pause all video pairs
+                this.videoPairs.forEach(pair => {
+                    this.pauseVideoPair(pair);
+                });
+            }
+        });
+    }
+    
+    setupSyncEvents() {
+        this.videoPairs.forEach(pair => {
+            pair.forEach(videoData => {
+                const { container } = videoData;
+                
+                // Hover over any container in the pair pauses both
+                container.addEventListener('mouseenter', () => {
+                    this.pauseVideoPair(pair);
+                    pair.forEach(v => {
+                        v.container.classList.add('paused');
+                        v.container.classList.add('pair-paused');
+                    });
+                });
+                
+                container.addEventListener('mouseleave', () => {
+                    if (pair.some(v => v.shouldPlay) && !pair.some(v => v.isPlaying)) {
+                        this.playVideoPair(pair);
+                    }
+                    pair.forEach(v => {
+                        v.container.classList.remove('paused');
+                        v.container.classList.remove('pair-paused');
+                    });
+                });
+                
+                // Touch/click - tap any video to pause/play the pair
+                container.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (pair.some(v => v.isPlaying)) {
+                        this.pauseVideoPair(pair);
+                        pair.forEach(v => {
+                            v.container.classList.add('paused');
+                            v.container.classList.add('pair-paused');
+                        });
+                    } else {
+                        this.playVideoPair(pair);
+                        pair.forEach(v => {
+                            v.container.classList.remove('paused');
+                            v.container.classList.remove('pair-paused');
+                        });
+                    }
+                });
+            });
+        });
+    }
+    
+    setupProgressBars() {
+        this.videoPairs.forEach(pair => {
+            pair.forEach(videoData => {
+                const progressBar = videoData.container.querySelector('.video-progress');
+                if (progressBar) {
+                    progressBar.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent triggering click on container
+                        const rect = progressBar.getBoundingClientRect();
+                        const pos = (e.clientX - rect.left) / rect.width;
+                        const time = pos * videoData.video.duration;
+                        
+                        // Seek all videos in the pair
+                        pair.forEach(v => {
+                            v.video.currentTime = time % v.video.duration;
+                        });
+                    });
                 }
             });
         });
     }
     
-    handleNavScroll() {
-        const scrollY = window.scrollY;
+    playVideoPair(pair) {
+        // Find master video (raw)
+        const master = pair.find(v => v.isMaster) || pair[0];
         
-        if (scrollY > 50) {
-            this.nav.classList.add('is-compact');
-            this.nav.classList.remove('is-expanding');
-        } else {
-            this.nav.classList.remove('is-compact');
-            this.nav.classList.add('is-expanding');
+        // Play master first
+        if (master && master.video.paused) {
+            master.video.play().then(() => {
+                master.isPlaying = true;
+                master.container.classList.add('playing');
+                master.container.classList.remove('paused');
+                
+                // Sync time and play other videos
+                pair.forEach(videoData => {
+                    if (videoData !== master) {
+                        videoData.video.currentTime = master.video.currentTime % videoData.video.duration;
+                        videoData.video.play().then(() => {
+                            videoData.isPlaying = true;
+                            videoData.container.classList.add('playing');
+                            videoData.container.classList.remove('paused');
+                        }).catch(console.log);
+                    }
+                });
+            }).catch(error => {
+                console.log('Auto-play prevented:', error);
+                pair.forEach(v => {
+                    v.container.classList.add('paused');
+                });
+            });
         }
     }
     
-    handleBackToTop() {
-        if (window.scrollY > 300) {
-            this.backToTopBtn.classList.add('visible');
-        } else {
-            this.backToTopBtn.classList.remove('visible');
-        }
+    pauseVideoPair(pair) {
+        pair.forEach(videoData => {
+            if (!videoData.video.paused) {
+                videoData.video.pause();
+                videoData.isPlaying = false;
+                videoData.container.classList.remove('playing');
+            }
+        });
     }
     
-    scrollToTop() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    playAllInView() {
+        this.videoPairs.forEach(pair => {
+            // Check if any video in the pair is in view
+            const isAnyInView = pair.some(videoData => {
+                const rect = videoData.container.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) * this.threshold &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            });
+            
+            if (isAnyInView && this.isPageVisible) {
+                pair.forEach(v => v.shouldPlay = true);
+                this.playVideoPair(pair);
+            }
         });
     }
 }
 
-// Initialize everything
+// ==========================================
+// FIXED LOAD ANIMATIONS - NO INITIAL HIDING
+// ==========================================
+function initLoadAnimations() {
+    // DON'T hide elements initially - only animate what's already visible
+    // Hero section entrance animation (gentle fade in)
+    gsap.to('.hero-content', {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power2.out",
+        delay: 0.3
+    });
+    
+    // Hero text staggered animation - start from current visible state
+    const heroTl = gsap.timeline({ delay: 0.5 });
+    heroTl.to('.hero-title', {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "back.out(1.7)"
+    })
+    .to('.hero-subtitle', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out"
+    }, "-=0.5")
+    .to('.hero-description', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out"
+    }, "-=0.3")
+    .to('.hero-buttons', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out"
+    }, "-=0.2");
+    
+    // Nav animation
+    gsap.from('.nav-container', {
+        y: -30,
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+        delay: 0.2
+    });
+}
+
+// ==========================================
+// SCROLL-BASED ANIMATIONS (FIXED)
+// ==========================================
+function initScrollAnimations() {
+    // Section title animations
+    gsap.utils.toArray('.section-title').forEach(section => {
+        gsap.from(section, {
+            scrollTrigger: {
+                trigger: section,
+                start: "top 85%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+    });
+    
+    // Edit row animations - FIXED: No initial hiding
+    gsap.utils.toArray('.edit-row').forEach((row, i) => {
+        gsap.from(row, {
+            scrollTrigger: {
+                trigger: row,
+                start: "top 90%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            y: 30,
+            duration: 0.6,
+            ease: "power2.out",
+            delay: i * 0.1
+        });
+    });
+    
+    // Gallery item animations
+    gsap.utils.toArray('.gallery-item').forEach((item, i) => {
+        gsap.from(item, {
+            scrollTrigger: {
+                trigger: item,
+                start: "top 90%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            scale: 0.95,
+            duration: 0.6,
+            ease: "back.out(1.2)",
+            delay: i * 0.1
+        });
+    });
+    
+    // About section animation
+    gsap.from('.about-container', {
+        scrollTrigger: {
+            trigger: '.about-section',
+            start: "top 85%",
+            toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power2.out"
+    });
+    
+    // Skills tag animations
+    gsap.utils.toArray('.skill-tag').forEach((tag, i) => {
+        gsap.from(tag, {
+            scrollTrigger: {
+                trigger: '.skills-section',
+                start: "top 90%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            x: -15,
+            duration: 0.4,
+            ease: "power2.out",
+            delay: i * 0.03
+        });
+    });
+    
+    // Timeline animations
+    gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+        gsap.from(item, {
+            scrollTrigger: {
+                trigger: item,
+                start: "top 92%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            x: i % 2 === 0 ? -30 : 30,
+            duration: 0.6,
+            ease: "power2.out",
+            delay: i * 0.1
+        });
+    });
+    
+    // Contact section animation
+    gsap.from('.contact-container', {
+        scrollTrigger: {
+            trigger: '.contact-section',
+            start: "top 85%",
+            toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power2.out"
+    });
+    
+    // Contact item animations
+    gsap.utils.toArray('.contact-item').forEach((item, i) => {
+        gsap.from(item, {
+            scrollTrigger: {
+                trigger: '.contact-info',
+                start: "top 90%",
+                toggleActions: "play none none none"
+            },
+            opacity: 0,
+            scale: 0.9,
+            duration: 0.6,
+            ease: "back.out(1.2)",
+            delay: i * 0.15
+        });
+    });
+}
+
+// ==========================================
+// SMOOTH SCROLLING
+// ==========================================
+function initSmoothScrolling() {
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// ==========================================
+// HERO IMAGE ANIMATION
+// ==========================================
+function initHeroImage() {
+    const heroImage = document.querySelector('.hero-face');
+    if (heroImage) {
+        heroImage.style.opacity = 0;
+        const reveal = () => {
+            gsap.fromTo(heroImage, 
+                {
+                    opacity: 0,
+                    scale: 1.1,
+                    rotation: -2
+                },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    rotation: 0,
+                    duration: 1.2,
+                    ease: "power2.out",
+                    delay: 0.2
+                }
+            );
+        };
+        if (heroImage.complete && heroImage.naturalWidth !== 0) {
+            reveal();
+        } else {
+            heroImage.addEventListener('load', reveal, { once: true });
+            setTimeout(() => {
+                if (parseFloat(getComputedStyle(heroImage).opacity) === 0) reveal();
+            }, 1500);
+        }
+    }
+}
+
+// ==========================================
+// NAVIGATION SCROLL EFFECT (FIXED)
+// ==========================================
+function initNavigationScroll() {
+    const nav = document.querySelector('.glass-nav');
+    if (!nav) return;
+    
+    let lastScroll = 0;
+    let ticking = false;
+    
+    function updateNav() {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > 100) {
+            nav.classList.add('is-compact');
+        } else {
+            nav.classList.remove('is-compact');
+        }
+        
+        lastScroll = currentScroll;
+        ticking = false;
+    }
+    
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(updateNav);
+            ticking = true;
+        }
+    });
+}
+
+// ==========================================
+// BUTTON RIPPLE EFFECT
+// ==========================================
+function initButtonRipples() {
+    const buttons = document.querySelectorAll('.glass-button');
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Don't create ripple for back-to-top button
+            if (this.id === 'backToTop') return;
+            
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(0);
+                animation: ripple 0.6s linear;
+                width: ${size}px;
+                height: ${size}px;
+                top: ${y}px;
+                left: ${x}px;
+                pointer-events: none;
+            `;
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    });
+    
+    // Add ripple animation CSS
+    if (!document.querySelector('#ripple-styles')) {
+        const style = document.createElement('style');
+        style.id = 'ripple-styles';
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// ==========================================
+// HOVER ANIMATIONS
+// ==========================================
+function initHoverAnimations() {
+    // Button hover animations
+    const buttons = document.querySelectorAll('.glass-button:not(#backToTop)');
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            gsap.to(this, {
+                scale: 1.05,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            gsap.to(this, {
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+    });
+    
+    // Card hover animations
+    const cards = document.querySelectorAll('.glass-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            gsap.to(this, {
+                y: -5,
+                boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+                duration: 0.4,
+                ease: "power2.out"
+            });
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            gsap.to(this, {
+                y: 0,
+                boxShadow: 'none',
+                duration: 0.4,
+                ease: "power2.out"
+            });
+        });
+    });
+    
+    // Social link hover animations
+    const socialLinks = document.querySelectorAll('.social-link');
+    socialLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+            gsap.to(this, {
+                scale: 1.15,
+                rotation: 5,
+                duration: 0.3,
+                ease: "back.out(1.7)"
+            });
+        });
+        
+        link.addEventListener('mouseleave', function() {
+            gsap.to(this, {
+                scale: 1,
+                rotation: 0,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+    });
+}
+
+// ==========================================
+// BACK TO TOP BUTTON
+// ==========================================
+function initBackToTop() {
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    if (!backToTopBtn) return;
+    
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('visible');
+            gsap.to(backToTopBtn, {
+                opacity: 0.9,
+                duration: 0.3
+            });
+        } else {
+            backToTopBtn.classList.remove('visible');
+            gsap.to(backToTopBtn, {
+                opacity: 0,
+                duration: 0.3
+            });
+        }
+    });
+    
+    // Scroll to top when clicked
+    backToTopBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        
+        // Add a little bounce animation
+        gsap.to(this, {
+            scale: 0.9,
+            duration: 0.1,
+            yoyo: true,
+            repeat: 1
+        });
+    });
+    
+    // Add hover effect
+    backToTopBtn.addEventListener('mouseenter', function() {
+        gsap.to(this, {
+            scale: 1.1,
+            duration: 0.2
+        });
+    });
+    
+    backToTopBtn.addEventListener('mouseleave', function() {
+        gsap.to(this, {
+            scale: 1,
+            duration: 0.2
+        });
+    });
+}
+
+// ==========================================
+// VIDEO SUPPORT FUNCTIONS
+// ==========================================
+function initVideoSupport() {
+    // Initialize the synced video player
+    window.syncedVideoPlayer = new SyncedVideoPlayer();
+    
+    console.log('SyncedVideoPlayer loaded successfully');
+    
+    // Force a check for videos in view after a short delay
+    setTimeout(() => {
+        window.syncedVideoPlayer.playAllInView();
+    }, 500);
+    
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', function() {
+        if (window.syncedVideoPlayer) {
+            if (document.hidden) {
+                console.log('Page hidden - videos paused');
+            } else {
+                console.log('Page visible - checking videos');
+                setTimeout(() => {
+                    window.syncedVideoPlayer.playAllInView();
+                }, 100);
+            }
+        }
+    });
+}
+
+// ==========================================
+// INITIALIZE EVERYTHING (FIXED)
+// ==========================================
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Anu Visuals - Initializing...');
-    
-    // Make sure body is visible immediately
-    document.body.style.opacity = '1';
     
     // Initialize Particle System
     new ParticleSystem();
     
-    // Initialize Navigation
-    new NavigationManager();
+    // Make sure body is visible immediately
+    document.body.style.opacity = '1';
     
-    // Initialize YouTube Player Manager
-    window.youtubePlayerManager = new YouTubePlayerManager();
+    // Initialize core functions first
+    initSmoothScrolling();
+    initNavigationScroll();
+    initHeroImage();
+    initButtonRipples();
+    initHoverAnimations();
+    initBackToTop();
+    initVideoSupport();
     
-    // Add loading spinner for videos
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        
-        .video-container.loading::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.15);
-            border-top-color: var(--blue-light);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            z-index: 3;
-        }
-        
-        .youtube-play-button:hover {
-            transform: scale(1) !important;
-        }
-        
-        .youtube-play-overlay {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .video-container:hover .youtube-play-overlay {
-            opacity: 1;
-        }
-        
-        .error-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            background: rgba(0,0,0,0.7);
-            padding: 10px 20px;
-            border-radius: 10px;
-            z-index: 10;
-            text-align: center;
-        }
-    `;
-    document.head.appendChild(style);
+    // Initialize animations after a short delay
+    setTimeout(() => {
+        initLoadAnimations();
+        initScrollAnimations();
+    }, 100);
     
     console.log('Anu Visuals - Initialized successfully!');
 });
 
-// Fallback in case YouTube API doesn't load
-setTimeout(() => {
-    if (typeof YT === 'undefined' && !window.youtubePlayerManager) {
-        console.warn('YouTube API not loaded, retrying...');
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+// Handle window resize for videos
+let resizeTimer;
+window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+        // Recheck videos on resize
+        if (window.syncedVideoPlayer) {
+            setTimeout(() => {
+                window.syncedVideoPlayer.playAllInView();
+            }, 100);
+        }
+    }, 250);
+});
+
+// Add console message for debugging
+console.log('Anu Visuals Script Loaded');
+
+// Add mobile navigation CSS
+const mobileNavStyles = document.createElement('style');
+mobileNavStyles.textContent = `
+    .nav-links.overflowing {
+        justify-content: flex-start;
+        padding-right: 10px;
     }
-}, 3000);
+    
+    @media (max-width: 320px) {
+        .nav-links {
+            max-width: 200px;
+        }
+    }
+`;
+document.head.appendChild(mobileNavStyles);
+
+// Add Font Awesome for sync icon
+const fontAwesomeLink = document.createElement('link');
+fontAwesomeLink.rel = 'stylesheet';
+fontAwesomeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+document.head.appendChild(fontAwesomeLink);
