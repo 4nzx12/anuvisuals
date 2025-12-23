@@ -1,69 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Professional Video Editor & Motion Graphic Designer specializing in short-form content, DaVinci Resolve, and creative visual storytelling.">
-    <meta name="keywords" content="video editor, motion graphics, DaVinci Resolve, short-form content, video production, creative director, Thrissur, Kerala, India, freelance editor">
-    <meta name="author" content="Anas Asif">
-    <meta name="robots" content="index, follow">
+    <!-- Add to <head> section of index.html, right after the viewport meta tag -->
+<meta name="description" content="Professional Video Editor & Motion Graphic Designer specializing in short-form content, DaVinci Resolve, and creative visual storytelling.">
+<meta name="keywords" content="video editor, motion graphics, DaVinci Resolve, short-form content, video production, creative director, Thrissur, Kerala, India, freelance editor">
+<meta name="author" content="Anas Asif">
+<meta name="robots" content="index, follow">
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Anu Visuals - Professional Video Editor & Motion Designer">
-    <meta property="og:description" content="Creative ideas. Clean rhythm. Visuals that carry weight.">
-    <meta property="og:image" content="https://4nzx12.github.io/anuvisuals/og-image.jpg">
-    <meta property="og:url" content="https://4nzx12.github.io/anuvisuals/">
-    <meta property="og:site_name" content="Anu Visuals">
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Anu Visuals - Professional Video Editor & Motion Designer">
+<meta property="og:description" content="Creative ideas. Clean rhythm. Visuals that carry weight.">
+<meta property="og:image" content="https://4nzx12.github.io/anuvisuals/og-image.jpg">
+<meta property="og:url" content="https://4nzx12.github.io/anuvisuals/">
+<meta property="og:site_name" content="Anu Visuals">
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://4nzx12.github.io/anuvisuals/">
+<!-- Canonical URL -->
+<link rel="canonical" href="https://4nzx12.github.io/anuvisuals/">
 
-    <!-- Additional SEO tags -->
-    <meta name="language" content="English">
-    <meta name="geo.region" content="IN-KL">
-    <meta name="geo.placename" content="Thrissur">
-    <meta name="geo.position" content="10.5276;76.2144">
-    <meta name="ICBM" content="10.5276, 76.2144">
-    <meta name="theme-color" content="#5a7ca8">
+<!-- Additional SEO tags -->
+<meta name="language" content="English">
+<meta name="geo.region" content="IN-KL">
+<meta name="geo.placename" content="Thrissur">
+<meta name="geo.position" content="10.5276;76.2144">
+<meta name="ICBM" content="10.5276, 76.2144">
+<meta name="theme-color" content="#5a7ca8">
 
-    <!-- Mobile web app capable -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Mobile web app capable -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- Viewport enhancement -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    
+<!-- Viewport enhancement -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anu Visuals - Video Editor • Motion Graphic Designer</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- YouTube IFrame API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
 </head>
 <body>
     <canvas id="particle-canvas"></canvas>
 
-    <!-- Navigation -->
     <nav class="glass-nav" id="main-nav">
-        <div class="nav-content">
-            <div class="logo">
-                <span class="logo-name">Anu Visuals</span>
-            </div>
-            <div class="nav-links">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#work" class="nav-link">Work</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
+        <div class="nav-container glass-effect">
+            <div class="nav-content">
+                <div class="logo">
+                    <span class="logo-name">Anu Visuals</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#work" class="nav-link">Work</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
             </div>
         </div>
     </nav>
 
     <main>
-        <!-- Hero Section -->
         <section id="home" class="hero-section">
             <div class="hero-container">
                 <div class="hero-glass glass-card">
@@ -97,256 +96,275 @@
             </div>
         </section>
 
-        <!-- Craft Section -->
         <section id="work" class="craft-section">
-            <div class="craft-header">
-                <div class="craft-title glass-card">
-                    <div class="glass-bend"></div>
-                    <div class="glass-face"></div>
-                    <div class="glass-edge"></div>
-                    <h2>My Craft</h2>
+    <div class="craft-header">
+        <div class="craft-title glass-card">
+            <div class="glass-bend"></div>
+            <div class="glass-face"></div>
+            <div class="glass-edge"></div>
+            <h2>My Craft</h2>
+        </div>
+       
+    </div>
+
+    <div class="craft-subsection">
+        <div class="subsection-header">
+            <h3>Editing</h3>
+        </div>
+
+        <!-- Edit 1 -->
+        <div class="edit-row" data-sync-group="edit1">
+            <!-- BEFORE -->
+            <div class="video-comparison-group raw-video">
+                <div class="comparison-label glass-card">
+                    <span class="label-icon">🎬</span>
+                    <span class="label-text">RAW</span>
+                </div>
+                <div class="video-container" data-video="edit1raw" data-sync-group="edit1">
+                    <video playsinline preload="metadata">
+                        <source src="videos/craft/raw/edit1raw.mp4" type="video/mp4">
+                        Your browser doesn't support HTML5 video.
+                    </video>
+                    <div class="video-overlay">
+                        <div class="video-hover-indicator">
+                            <span class="hover-pause-icon">⏸</span>
+                        </div>
+                    </div>
+                    <div class="video-progress">
+                        <div class="video-progress-fill"></div>
+                    </div>
+                    <div class="autoplay-badge">Auto-play</div>
                 </div>
             </div>
 
-            <!-- Editing Subsection -->
-            <div class="craft-subsection">
-                <div class="subsection-header">
-                    <h3>Editing</h3>
-                    <p class="craft-subtitle">Videos auto-play when visible. Click any video to control both simultaneously.</p>
+            <!-- AFTER -->
+            <div class="video-comparison-group final-video">
+                <div class="comparison-label glass-card">
+                    <span class="label-icon">✨</span>
+                    <span class="label-text">FINAL</span>
                 </div>
-
-                <!-- Edit 1 -->
-                <div class="edit-row" data-pair="pair1">
-                    <!-- RAW -->
-                    <div class="video-comparison-group raw-video">
-                        <div class="comparison-label glass-card">
-                            <span class="label-icon">🎬</span>
-                            <span class="label-text">RAW</span>
-                        </div>
-                        <div class="video-container" data-video-id="QKHdW98CORA" data-pair="pair1">
-                            <div class="youtube-player" id="player-pair1-raw"></div>
-                            <div class="video-controls">
-                                <button class="play-pause-btn">
-                                    <i class="fas fa-pause"></i>
-                                </button>
-                                <div class="sync-badge">
-                                    <i class="fas fa-link"></i> Synced
-                                </div>
-                            </div>
+                <div class="video-container" data-video="edit1final" data-sync-group="edit1">
+                    <video playsinline preload="metadata">
+                        <source src="videos/craft/final/edit1final.mp4" type="video/mp4">
+                        Your browser doesn't support HTML5 video.
+                    </video>
+                    <div class="video-overlay">
+                        <div class="video-hover-indicator">
+                            <span class="hover-pause-icon">⏸</span>
                         </div>
                     </div>
-
-                    <!-- FINAL -->
-                    <div class="video-comparison-group final-video">
-                        <div class="comparison-label glass-card">
-                            <span class="label-icon">✨</span>
-                            <span class="label-text">FINAL</span>
-                        </div>
-                        <div class="video-container" data-video-id="jgRyVs-_pUE" data-pair="pair1">
-                            <div class="youtube-player" id="player-pair1-final"></div>
-                            <div class="video-controls">
-                                <button class="play-pause-btn">
-                                    <i class="fas fa-pause"></i>
-                                </button>
-                                <div class="sync-badge">
-                                    <i class="fas fa-link"></i> Synced
-                                </div>
-                            </div>
-                        </div>
+                    <div class="video-progress">
+                        <div class="video-progress-fill"></div>
                     </div>
+                    <div class="autoplay-badge">Auto-play</div>
                 </div>
+            </div>
+        </div>
 
-                <!-- Edit 2 -->
-                <div class="edit-row" data-pair="pair2">
-                    <!-- RAW -->
-                    <div class="video-comparison-group raw-video">
-                        <div class="comparison-label glass-card">
-                            <span class="label-icon">🎬</span>
-                            <span class="label-text">RAW</span>
-                        </div>
-                        <div class="video-container" data-video-id="UGjnA4vRv5c" data-pair="pair2">
-                            <div class="youtube-player" id="player-pair2-raw"></div>
-                            <div class="video-controls">
-                                <button class="play-pause-btn">
-                                    <i class="fas fa-pause"></i>
-                                </button>
-                                <div class="sync-badge">
-                                    <i class="fas fa-link"></i> Synced
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- FINAL -->
-                    <div class="video-comparison-group final-video">
-                        <div class="comparison-label glass-card">
-                            <span class="label-icon">✨</span>
-                            <span class="label-text">FINAL</span>
-                        </div>
-                        <div class="video-container" data-video-id="ymhGu0zAbqk" data-pair="pair2">
-                            <div class="youtube-player" id="player-pair2-final"></div>
-                            <div class="video-controls">
-                                <button class="play-pause-btn">
-                                    <i class="fas fa-pause"></i>
-                                </button>
-                                <div class="sync-badge">
-                                    <i class="fas fa-link"></i> Synced
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Edit 2 -->
+        <div class="edit-row" data-sync-group="edit2">
+            <!-- BEFORE -->
+            <div class="video-comparison-group raw-video">
+                <div class="comparison-label glass-card">
+                    <span class="label-icon">🎬</span>
+                    <span class="label-text">RAW</span>
                 </div>
-
-                <!-- Edit 3 -->
-                <div class="edit-row" data-pair="pair3">
-                    <!-- RAW -->
-                    <div class="video-comparison-group raw-video">
-                        <div class="comparison-label glass-card">
-                            <span class="label-icon">🎬</span>
-                            <span class="label-text">RAW</span>
-                        </div>
-                        <div class="video-container" data-video-id="OCv03oBGqRA" data-pair="pair3">
-                            <div class="youtube-player" id="player-pair3-raw"></div>
-                            <div class="video-controls">
-                                <button class="play-pause-btn">
-                                    <i class="fas fa-pause"></i>
-                                </button>
-                                <div class="sync-badge">
-                                    <i class="fas fa-link"></i> Synced
-                                </div>
-                            </div>
+                <div class="video-container" data-video="edit2raw" data-sync-group="edit2">
+                    <video playsinline preload="metadata">
+                        <source src="videos/craft/raw/edit2raw.mp4" type="video/mp4">
+                        Your browser doesn't support HTML5 video.
+                    </video>
+                    <div class="video-overlay">
+                        <div class="video-hover-indicator">
+                            <span class="hover-pause-icon">⏸</span>
                         </div>
                     </div>
-
-                    <!-- FINAL -->
-                    <div class="video-comparison-group final-video">
-                        <div class="comparison-label glass-card">
-                            <span class="label-icon">✨</span>
-                            <span class="label-text">FINAL</span>
-                        </div>
-                        <div class="video-container" data-video-id="vscPDG95aT8" data-pair="pair3">
-                            <div class="youtube-player" id="player-pair3-final"></div>
-                            <div class="video-controls">
-                                <button class="play-pause-btn">
-                                    <i class="fas fa-pause"></i>
-                                </button>
-                                <div class="sync-badge">
-                                    <i class="fas fa-link"></i> Synced
-                                </div>
-                            </div>
-                        </div>
+                    <div class="video-progress">
+                        <div class="video-progress-fill"></div>
                     </div>
-                </div>
-
-                <!-- View All Edits Button -->
-                <div class="gallery-action">
-                    <a href="https://drive.google.com/drive/folders/131W9R9bk4TH_SPBKcdLx3ZF7i3sr7Ggo?usp=sharing" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       class="glass-button">
-                        <i class="fas fa-film"></i> View All Edits
-                    </a>
+                    <div class="autoplay-badge">Auto-play</div>
                 </div>
             </div>
 
-            <!-- Design Section -->
-            <div class="craft-subsection">
-                <div class="subsection-header">
-                    <h3><i class="fas fa-paint-brush"></i> Design</h3>
+            <!-- AFTER -->
+            <div class="video-comparison-group final-video">
+                <div class="comparison-label glass-card">
+                    <span class="label-icon">✨</span>
+                    <span class="label-text">FINAL</span>
                 </div>
-                <div class="gallery-grid design-grid">
-                    <div class="gallery-item glass-card">
-                        <div class="glass-face"></div>
-                        <div class="glass-bend"></div>
-                        <div class="glass-edge"></div>
-                        <div class="image-wrapper">
-                            <img src="images/design/design1.webp" alt="Graphic Design Project 1" loading="lazy">
+                <div class="video-container" data-video="edit2final" data-sync-group="edit2">
+                    <video playsinline preload="metadata">
+                        <source src="videos/craft/final/edit2final.mp4" type="video/mp4">
+                        Your browser doesn't support HTML5 video.
+                    </video>
+                    <div class="video-overlay">
+                        <div class="video-hover-indicator">
+                            <span class="hover-pause-icon">⏸</span>
                         </div>
                     </div>
-                    <div class="gallery-item glass-card">
-                        <div class="glass-face"></div>
-                        <div class="glass-bend"></div>
-                        <div class="glass-edge"></div>
-                        <div class="image-wrapper">
-                            <img src="images/design/design2.webp" alt="Graphic Design Project 2" loading="lazy">
-                        </div>
+                    <div class="video-progress">
+                        <div class="video-progress-fill"></div>
                     </div>
-                    <div class="gallery-item glass-card">
-                        <div class="glass-face"></div>
-                        <div class="glass-bend"></div>
-                        <div class="glass-edge"></div>
-                        <div class="image-wrapper">
-                            <img src="images/design/design3.webp" alt="Graphic Design Project 3" loading="lazy">
-                        </div>
-                    </div>
+                    <div class="autoplay-badge">Auto-play</div>
                 </div>
-                <div class="gallery-action">
-                    <a href="https://drive.google.com/drive/folders/1F3gPzMZDG5vAJhbyop4mXN1p-7t_GDAn?usp=sharing" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       class="glass-button">
-                        <i class="fas fa-palette"></i> View All Designs
-                    </a>
+            </div>
+        </div>
+
+        <!-- Edit 3 -->
+        <div class="edit-row" data-sync-group="edit3">
+            <!-- BEFORE -->
+            <div class="video-comparison-group raw-video">
+                <div class="comparison-label glass-card">
+                    <span class="label-icon">🎬</span>
+                    <span class="label-text">RAW</span>
+                </div>
+                <div class="video-container" data-video="edit3raw" data-sync-group="edit3">
+                    <video playsinline preload="metadata">
+                        <source src="videos/craft/raw/edit3raw.mp4" type="video/mp4">
+                        Your browser doesn't support HTML5 video.
+                    </video>
+                    <div class="video-overlay">
+                        <div class="video-hover-indicator">
+                            <span class="hover-pause-icon">⏸</span>
+                        </div>
+                    </div>
+                    <div class="video-progress">
+                        <div class="video-progress-fill"></div>
+                    </div>
+                    <div class="autoplay-badge">Auto-play</div>
                 </div>
             </div>
 
-            <!-- Stills Section -->
-            <div class="craft-subsection">
-                <div class="subsection-header">
-                    <h3><i class="fas fa-camera"></i> Stills</h3>
+            <!-- AFTER -->
+            <div class="video-comparison-group final-video">
+                <div class="comparison-label glass-card">
+                    <span class="label-icon">✨</span>
+                    <span class="label-text">FINAL</span>
                 </div>
-                <div class="gallery-grid photo-grid">
-                    <!-- Still 1 -->
-                    <div class="gallery-item glass-card">
-                        <div class="glass-face"></div>
-                        <div class="image-wrapper">
-                            <img src="images/stills/still1.webp" alt="Chavvakkad, Thrissur" loading="lazy">
-                        </div>
-                        <div class="item-caption">
-                            <p><strong>Chavvakkad, Thrissur</strong><br>
-                            Canon EOS M50m2 • 55-200 EF-M<br>
-                            145mm • f/5.6 • 1/640s</p>
+                <div class="video-container" data-video="edit3final" data-sync-group="edit3">
+                    <video playsinline preload="metadata">
+                        <source src="videos/craft/final/edit3final.mp4" type="video/mp4">
+                        Your browser doesn't support HTML5 video.
+                    </video>
+                    <div class="video-overlay">
+                        <div class="video-hover-indicator">
+                            <span class="hover-pause-icon">⏸</span>
                         </div>
                     </div>
-                    
-                    <!-- Still 2 -->
-                    <div class="gallery-item glass-card">
-                        <div class="glass-face"></div>
-                        <div class="image-wrapper">
-                            <img src="images/stills/still2.webp" alt="Chavvakkad, Thrissur" loading="lazy">
-                        </div>
-                        <div class="item-caption">
-                            <p><strong>Chavvakkad, Thrissur</strong><br>
-                            Canon EOS M50m2 • 55-200 EF-M<br>
-                            55mm • f/4.5 • 1/500s</p>
-                        </div>
+                    <div class="video-progress">
+                        <div class="video-progress-fill"></div>
                     </div>
-                    
-                    <!-- Still 3 -->
-                    <div class="gallery-item glass-card">
-                        <div class="glass-face"></div>
-                        <div class="image-wrapper">
-                            <img src="images/stills/still3.webp" alt="Chavvakkad, Thrissur" loading="lazy">
-                        </div>
-                        <div class="item-caption">
-                            <p><strong>Chavvakkad, Thrissur</strong><br>
-                            Canon EOS M50m2 • 55-200 EF-M<br>
-                            55mm • f/5.6 • 1/800s</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="gallery-action">
-                    <a href="https://drive.google.com/drive/folders/1cfQxRk3_lLOZtxgPTCrEJxQMR4-_MO0D?usp=sharing" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       class="glass-button">
-                        <i class="fas fa-images"></i> View All Stills
-                    </a>
+                    <div class="autoplay-badge">Auto-play</div>
                 </div>
             </div>
-        </section>
+        </div>
+        <!-- After the last edit-row in the Editing section -->
+<div class="gallery-action">
+    <a href="https://drive.google.com/drive/folders/131W9R9bk4TH_SPBKcdLx3ZF7i3sr7Ggo?usp=sharing" 
+       target="_blank" 
+       class="glass-button">
+        <i class="fas fa-film"></i> View All Edits
+    </a>
+</div>
+    </div>
 
-        <!-- About Section -->
+   <!-- Design Section -->
+<div class="craft-subsection">
+    <div class="subsection-header">
+        <h3><i class="fas fa-paint-brush"></i> Design</h3>
+        
+    </div>
+    <div class="gallery-grid design-grid">
+        <div class="gallery-item glass-card">
+            <div class="glass-face"></div>
+            <div class="glass-bend"></div>
+            <div class="glass-edge"></div>
+            <div class="image-wrapper">
+                <img src="images/design/design1.webp" alt="Graphic Design Project 1" loading="lazy">
+            </div>
+        </div>
+        <div class="gallery-item glass-card">
+            <div class="glass-face"></div>
+            <div class="glass-bend"></div>
+            <div class="glass-edge"></div>
+            <div class="image-wrapper">
+                <img src="images/design/design2.webp" alt="Graphic Design Project 2" loading="lazy">
+            </div>
+        </div>
+        <div class="gallery-item glass-card">
+            <div class="glass-face"></div>
+            <div class="glass-bend"></div>
+            <div class="glass-edge"></div>
+            <div class="image-wrapper">
+                <img src="images/design/design3.webp" alt="Graphic Design Project 3" loading="lazy">
+            </div>
+        </div>
+    </div>
+  
+<div class="gallery-action">
+    <a href="https://drive.google.com/drive/folders/1F3gPzMZDG5vAJhbyop4mXN1p-7t_GDAn?usp=sharing" 
+       target="_blank" 
+       class="glass-button">
+        <i class="fas fa-palette"></i> View All Designs
+    </a>
+</div>
+</div>
+
+   <!-- Stills Section -->
+<div class="craft-subsection">
+    <div class="subsection-header">
+        <h3><i class="fas fa-camera"></i> Stills</h3>
+    </div>
+    <div class="gallery-grid photo-grid">
+        <!-- Still 1 -->
+        <div class="gallery-item glass-card">
+            <div class="glass-face"></div>
+            <div class="image-wrapper">
+                <img src="images/stills/still1.webp" alt="Chavvakkad, Thrissur" loading="lazy">
+            </div>
+            <div class="item-caption">
+                <p><strong>Chavvakkad, Thrissur</strong><br>
+                Canon EOS M50m2 • 55-200 EF-M<br>
+                145mm • f/5.6 • 1/640s</p>
+            </div>
+        </div>
+        
+        <!-- Still 2 -->
+        <div class="gallery-item glass-card">
+            <div class="glass-face"></div>
+            <div class="image-wrapper">
+                <img src="images/stills/still2.webp" alt="Chavvakkad, Thrissur" loading="lazy">
+            </div>
+            <div class="item-caption">
+                <p><strong>Chavvakkad, Thrissur</strong><br>
+                Canon EOS M50m2 • 55-200 EF-M<br>
+                55mm • f/4.5 • 1/500s</p>
+            </div>
+        </div>
+        
+        <!-- Still 3 -->
+        <div class="gallery-item glass-card">
+            <div class="glass-face"></div>
+            <div class="image-wrapper">
+                <img src="images/stills/still3.webp" alt="Chavvakkad, Thrissur" loading="lazy">
+            </div>
+            <div class="item-caption">
+                <p><strong>Chavvakkad, Thrissur</strong><br>
+                Canon EOS M50m2 • 55-200 EF-M<br>
+                55mm • f/5.6 • 1/800s</p>
+            </div>
+        </div>
+    </div>
+
+<div class="gallery-action">
+    <a href="https://drive.google.com/drive/folders/1cfQxRk3_lLOZtxgPTCrEJxQMR4-_MO0D?usp=sharing" 
+       target="_blank" 
+       class="glass-button">
+        <i class="fas fa-images"></i> View All Stills
+    </a>
+</div>
+</div>
+
         <section id="about" class="about-section">
             <div class="about-container glass-card large">
                 <div class="glass-bend"></div>
@@ -381,8 +399,8 @@
                             <div class="skill-tag">
                                 <i class="fas fa-hashtag"></i> Social Strategy
                             </div>
-                            <div class="skill-tag">
-                                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/davinciresolve.svg" alt="DaVinci Resolve" class="skill-icon"> DaVinci Resolve
+                             <div class="skill-tag">
+                            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/davinciresolve.svg" alt="DaVinci Resolve" class="skill-icon"> DaVinci Resolve
                             </div>
                             <div class="skill-tag">
                                 <i class="fas fa-video"></i> Cinematography
@@ -409,7 +427,7 @@
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" class="skill-icon"> Adobe Photoshop
                             </div>
                             <div class="skill-tag">
-                                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/canva.svg" alt="Canva" class="skill-icon"> Canva
+                                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/canva.svg" alt="Canva" class="skill-icon" alt="Canva" class="skill-icon"> Canva
                             </div>
                         </div>
                     </div>
@@ -417,7 +435,6 @@
             </div>
         </section>
 
-        <!-- Experience Timeline -->
         <section class="experience-section">
             <div class="section-title glass-card">
                 <div class="glass-bend"></div>
@@ -489,90 +506,88 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="contact-section">
-            <div class="contact-container glass-card large">
-                <div class="glass-bend"></div>
-                <div class="glass-face"></div>
-                <div class="glass-edge"></div>
-                <div class="contact-content">
-                    <div class="contact-header">
-                        <h2>Let's Create Together</h2>
-                        <p class="contact-subtitle">Have a project in mind? Get in touch.</p>
-                    </div>
+    <div class="contact-container glass-card large">
+        <div class="glass-bend"></div>
+        <div class="glass-face"></div>
+        <div class="glass-edge"></div>
+        <div class="contact-content">
+            <div class="contact-header">
+                <h2>Let's Create Together</h2>
+                <p class="contact-subtitle">Have a project in mind? Get in touch.</p>
+            </div>
 
-                    <div class="contact-info">
-                        <div class="contact-item glass-card">
-                            <div class="glass-bend"></div>
-                            <div class="glass-face"></div>
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <h3>Email</h3>
-                            <a href="mailto:anuvisualmedia12@gmail.com" class="glass-button">Send Email</a>
-                        </div>
-                        <div class="contact-item glass-card">
-                            <div class="glass-bend"></div>
-                            <div class="glass-face"></div>
-                            <div class="contact-icon">
-                                <i class="fab fa-whatsapp"></i>
-                            </div>
-                            <h3>WhatsApp</h3>
-                            <a href="https://wa.me/918089120708" class="glass-button">Message Me</a>
-                        </div>
-                        <div class="contact-item glass-card">
-                            <div class="glass-bend"></div>
-                            <div class="glass-face"></div>
-                            <div class="contact-icon">
-                                <i class="fab fa-instagram"></i>
-                            </div>
-                            <h3>Instagram</h3>
-                            <a href="https://www.instagram.com/_4nzx_/" target="_blank" class="glass-button">Follow</a>
-                        </div>
+            <div class="contact-info">
+                <div class="contact-item glass-card">
+                    <div class="glass-bend"></div>
+                    <div class="glass-face"></div>
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
                     </div>
+                    <h3>Email</h3>
+                    <a href="mailto:anuvisualmedia12@gmail.com" class="glass-button">Send Email</a>
+                </div>
+                <div class="contact-item glass-card">
+                    <div class="glass-bend"></div>
+                    <div class="glass-face"></div>
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <a href="https://wa.me/918089120708" class="glass-button">Message Me</a>
+                </div>
+                <div class="contact-item glass-card">
+                    <div class="glass-bend"></div>
+                    <div class="glass-face"></div>
+                    <div class="contact-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3>Instagram</h3>
+                    <a href="https://www.instagram.com/_4nzx_/" target="_blank" class="glass-button">Follow</a>
                 </div>
             </div>
-        </section>
-
-        <!-- Back to Top Button -->
+        </div>
+    </div>
+</section>
+                <!-- Back to Top Button -->
         <button id="backToTop" class="back-to-top glass-button">
             <i class="fas fa-chevron-up"></i>
         </button>
     </main>
 
     <footer class="glass-footer">
-        <div class="footer-content glass-card">
-            <div class="footer-text">
-                <p>&copy; 2025 Anu Visuals.</p>
-                <p>Creative Director & Editor.</p>
+    <div class="footer-content glass-card">
+        <div class="footer-text">
+            <p>&copy; 2025 Anu Visuals.</p>
+            <p>Creative Director & Editor.</p>
+            
+            <!-- Social Links with Brand Logos -->
+            <div class="footer-social">
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/_4nzx_/" target="_blank" class="social-link instagram" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
                 
-                <!-- Social Links with Brand Logos -->
-                <div class="footer-social">
-                    <!-- Instagram -->
-                    <a href="https://www.instagram.com/_4nzx_/" target="_blank" class="social-link instagram" title="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    
-                    <!-- Facebook -->
-                    <a href="https://www.facebook.com/AnuVisualss/" target="_blank" class="social-link facebook" title="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    
-                    <!-- WhatsApp -->
-                    <a href="https://wa.me/918089120708" target="_blank" class="social-link whatsapp" title="WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    
-                    <!-- Email -->
-                    <a href="mailto:anuvisualmedia12@gmail.com" class="social-link email" title="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/AnuVisualss/" target="_blank" class="social-link facebook" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
                 
-                <p class="footer-tagline">Let's create something amazing together</p>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/918089120708" target="_blank" class="social-link whatsapp" title="WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                
+                <!-- Email -->
+                <a href="mailto:anuvisualmedia12@gmail.com" class="social-link email" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
+            
+            <p class="footer-tagline">Let's create something amazing together</p>
         </div>
-    </footer>
+    </div>
+</footer>
 
     <svg style="display: none" xmlns="http://www.w3.org/2000/svg">
         <filter id="glass-blur" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
