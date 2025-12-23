@@ -39,12 +39,15 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <canvas id="particle-canvas"></canvas>
 
+    <!-- Navigation -->
     <nav class="glass-nav" id="main-nav">
         <div class="nav-content">
             <div class="logo">
@@ -60,6 +63,7 @@
     </nav>
 
     <main>
+        <!-- Hero Section -->
         <section id="home" class="hero-section">
             <div class="hero-container">
                 <div class="hero-glass glass-card">
@@ -93,6 +97,7 @@
             </div>
         </section>
 
+        <!-- Craft Section -->
         <section id="work" class="craft-section">
             <div class="craft-header">
                 <div class="craft-title glass-card">
@@ -103,36 +108,30 @@
                 </div>
             </div>
 
+            <!-- Editing Subsection -->
             <div class="craft-subsection">
                 <div class="subsection-header">
                     <h3>Editing</h3>
+                    <p class="craft-subtitle">Videos auto-play when visible. Click any video to control both simultaneously.</p>
                 </div>
 
                 <!-- Edit 1 -->
-                <div class="edit-row">
+                <div class="edit-row" data-pair="pair1">
                     <!-- RAW -->
                     <div class="video-comparison-group raw-video">
                         <div class="comparison-label glass-card">
                             <span class="label-icon">🎬</span>
                             <span class="label-text">RAW</span>
                         </div>
-                        <div class="video-container">
-                            <div class="youtube-embed-wrapper">
-                                <iframe 
-                                    src="https://www.youtube.com/embed/QKHdW98CORA" 
-                                    title="Raw Edit 1"
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                            <div class="youtube-play-overlay">
-                                <div class="youtube-play-button">
-                                    <i class="fas fa-play"></i>
+                        <div class="video-container" data-video-id="QKHdW98CORA" data-pair="pair1">
+                            <div class="youtube-player" id="player-pair1-raw"></div>
+                            <div class="video-controls">
+                                <button class="play-pause-btn">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <div class="sync-badge">
+                                    <i class="fas fa-link"></i> Synced
                                 </div>
-                            </div>
-                            <div class="youtube-brand">
-                                <i class="fab fa-youtube"></i> YouTube
                             </div>
                         </div>
                     </div>
@@ -143,53 +142,37 @@
                             <span class="label-icon">✨</span>
                             <span class="label-text">FINAL</span>
                         </div>
-                        <div class="video-container">
-                            <div class="youtube-embed-wrapper">
-                                <iframe 
-                                    src="https://www.youtube.com/embed/jgRyVs-_pUE" 
-                                    title="Final Edit 1"
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                            <div class="youtube-play-overlay">
-                                <div class="youtube-play-button">
-                                    <i class="fas fa-play"></i>
+                        <div class="video-container" data-video-id="jgRyVs-_pUE" data-pair="pair1">
+                            <div class="youtube-player" id="player-pair1-final"></div>
+                            <div class="video-controls">
+                                <button class="play-pause-btn">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <div class="sync-badge">
+                                    <i class="fas fa-link"></i> Synced
                                 </div>
-                            </div>
-                            <div class="youtube-brand">
-                                <i class="fab fa-youtube"></i> YouTube
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Edit 2 -->
-                <div class="edit-row">
+                <div class="edit-row" data-pair="pair2">
                     <!-- RAW -->
                     <div class="video-comparison-group raw-video">
                         <div class="comparison-label glass-card">
                             <span class="label-icon">🎬</span>
                             <span class="label-text">RAW</span>
                         </div>
-                        <div class="video-container">
-                            <div class="youtube-embed-wrapper">
-                                <iframe 
-                                    src="https://www.youtube.com/embed/UGjnA4vRv5c" 
-                                    title="Raw Edit 2"
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                            <div class="youtube-play-overlay">
-                                <div class="youtube-play-button">
-                                    <i class="fas fa-play"></i>
+                        <div class="video-container" data-video-id="UGjnA4vRv5c" data-pair="pair2">
+                            <div class="youtube-player" id="player-pair2-raw"></div>
+                            <div class="video-controls">
+                                <button class="play-pause-btn">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <div class="sync-badge">
+                                    <i class="fas fa-link"></i> Synced
                                 </div>
-                            </div>
-                            <div class="youtube-brand">
-                                <i class="fab fa-youtube"></i> YouTube
                             </div>
                         </div>
                     </div>
@@ -200,53 +183,37 @@
                             <span class="label-icon">✨</span>
                             <span class="label-text">FINAL</span>
                         </div>
-                        <div class="video-container">
-                            <div class="youtube-embed-wrapper">
-                                <iframe 
-                                    src="https://www.youtube.com/embed/ymhGu0zAbqk" 
-                                    title="Final Edit 2"
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                            <div class="youtube-play-overlay">
-                                <div class="youtube-play-button">
-                                    <i class="fas fa-play"></i>
+                        <div class="video-container" data-video-id="ymhGu0zAbqk" data-pair="pair2">
+                            <div class="youtube-player" id="player-pair2-final"></div>
+                            <div class="video-controls">
+                                <button class="play-pause-btn">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <div class="sync-badge">
+                                    <i class="fas fa-link"></i> Synced
                                 </div>
-                            </div>
-                            <div class="youtube-brand">
-                                <i class="fab fa-youtube"></i> YouTube
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Edit 3 -->
-                <div class="edit-row">
+                <div class="edit-row" data-pair="pair3">
                     <!-- RAW -->
                     <div class="video-comparison-group raw-video">
                         <div class="comparison-label glass-card">
                             <span class="label-icon">🎬</span>
                             <span class="label-text">RAW</span>
                         </div>
-                        <div class="video-container">
-                            <div class="youtube-embed-wrapper">
-                                <iframe 
-                                    src="https://www.youtube.com/embed/OCv03oBGqRA" 
-                                    title="Raw Edit 3"
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                            <div class="youtube-play-overlay">
-                                <div class="youtube-play-button">
-                                    <i class="fas fa-play"></i>
+                        <div class="video-container" data-video-id="OCv03oBGqRA" data-pair="pair3">
+                            <div class="youtube-player" id="player-pair3-raw"></div>
+                            <div class="video-controls">
+                                <button class="play-pause-btn">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <div class="sync-badge">
+                                    <i class="fas fa-link"></i> Synced
                                 </div>
-                            </div>
-                            <div class="youtube-brand">
-                                <i class="fab fa-youtube"></i> YouTube
                             </div>
                         </div>
                     </div>
@@ -257,23 +224,15 @@
                             <span class="label-icon">✨</span>
                             <span class="label-text">FINAL</span>
                         </div>
-                        <div class="video-container">
-                            <div class="youtube-embed-wrapper">
-                                <iframe 
-                                    src="https://www.youtube.com/embed/vscPDG95aT8" 
-                                    title="Final Edit 3"
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                            <div class="youtube-play-overlay">
-                                <div class="youtube-play-button">
-                                    <i class="fas fa-play"></i>
+                        <div class="video-container" data-video-id="vscPDG95aT8" data-pair="pair3">
+                            <div class="youtube-player" id="player-pair3-final"></div>
+                            <div class="video-controls">
+                                <button class="play-pause-btn">
+                                    <i class="fas fa-pause"></i>
+                                </button>
+                                <div class="sync-badge">
+                                    <i class="fas fa-link"></i> Synced
                                 </div>
-                            </div>
-                            <div class="youtube-brand">
-                                <i class="fab fa-youtube"></i> YouTube
                             </div>
                         </div>
                     </div>
@@ -387,6 +346,7 @@
             </div>
         </section>
 
+        <!-- About Section -->
         <section id="about" class="about-section">
             <div class="about-container glass-card large">
                 <div class="glass-bend"></div>
@@ -421,8 +381,8 @@
                             <div class="skill-tag">
                                 <i class="fas fa-hashtag"></i> Social Strategy
                             </div>
-                             <div class="skill-tag">
-                            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/davinciresolve.svg" alt="DaVinci Resolve" class="skill-icon"> DaVinci Resolve
+                            <div class="skill-tag">
+                                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/davinciresolve.svg" alt="DaVinci Resolve" class="skill-icon"> DaVinci Resolve
                             </div>
                             <div class="skill-tag">
                                 <i class="fas fa-video"></i> Cinematography
@@ -457,6 +417,7 @@
             </div>
         </section>
 
+        <!-- Experience Timeline -->
         <section class="experience-section">
             <div class="section-title glass-card">
                 <div class="glass-bend"></div>
@@ -528,6 +489,7 @@
             </div>
         </section>
 
+        <!-- Contact Section -->
         <section id="contact" class="contact-section">
             <div class="contact-container glass-card large">
                 <div class="glass-bend"></div>
