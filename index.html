@@ -1,600 +1,308 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Add to <head> section of index.html, right after the viewport meta tag -->
-<meta name="description" content="Professional Video Editor & Motion Graphic Designer specializing in short-form content, DaVinci Resolve, and creative visual storytelling.">
-<meta name="keywords" content="video editor, motion graphics, DaVinci Resolve, short-form content, video production, creative director, Thrissur, Kerala, India, freelance editor">
-<meta name="author" content="Anas Asif">
-<meta name="robots" content="index, follow">
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Anu Visuals - Professional Video Editor & Motion Designer">
-<meta property="og:description" content="Creative ideas. Clean rhythm. Visuals that carry weight.">
-<meta property="og:image" content="https://4nzx12.github.io/anuvisuals/og-image.jpg">
-<meta property="og:url" content="https://4nzx12.github.io/anuvisuals/">
-<meta property="og:site_name" content="Anu Visuals">
-
-<!-- Canonical URL -->
-<link rel="canonical" href="https://4nzx12.github.io/anuvisuals/">
-
-<!-- Additional SEO tags -->
-<meta name="language" content="English">
-<meta name="geo.region" content="IN-KL">
-<meta name="geo.placename" content="Thrissur">
-<meta name="geo.position" content="10.5276;76.2144">
-<meta name="ICBM" content="10.5276, 76.2144">
-<meta name="theme-color" content="#5a7ca8">
-
-<!-- Mobile web app capable -->
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-<!-- Viewport enhancement -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    
+    <meta name="description" content="Professional Video Editor & Motion Graphic Designer specializing in short-form content, DaVinci Resolve, and creative visual storytelling.">
+    <meta name="keywords" content="video editor, motion graphics, DaVinci Resolve, short-form content, video production, Thrissur, Kerala">
+    <meta name="author" content="Anas Asif">
+    <meta name="theme-color" content="#5a7ca8">
+    
     <title>Anu Visuals - Video Editor • Motion Graphic Designer</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
 </head>
 <body>
-    <canvas id="particle-canvas"></canvas>
 
-    <nav class="glass-nav" id="main-nav">
-        <div class="nav-container glass-effect">
+    <div class="ambient-background">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="noise-overlay"></div>
+    </div>
+
+    <header class="site-header">
+        <nav class="glass-nav">
             <div class="nav-content">
-                <div class="logo">
-                    <span class="logo-name">Anu Visuals</span>
-                </div>
-                <div class="nav-links">
+                <a href="#home" class="logo-name">Anu Visuals</a>
+                
+                <div class="desktop-links">
                     <a href="#home" class="nav-link">Home</a>
                     <a href="#work" class="nav-link">Work</a>
                     <a href="#about" class="nav-link">About</a>
                     <a href="#contact" class="nav-link">Contact</a>
                 </div>
+
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="mobile-menu-overlay">
+            <div class="mobile-links-container">
+                <a href="#home" class="mobile-link">Home</a>
+                <a href="#work" class="mobile-link">Work</a>
+                <a href="#about" class="mobile-link">About</a>
+                <a href="#contact" class="mobile-link">Contact</a>
             </div>
         </div>
-    </nav>
+    </header>
 
     <main>
         <section id="home" class="hero-section">
-            <div class="hero-container">
-                <div class="hero-glass glass-card">
-                    <div class="glass-bend"></div>
-                    <div class="glass-face"></div>
-                    <div class="glass-edge"></div>
-                    <div class="hero-content">
-                        <div class="hero-image-container">
-                            <div class="hero-image">
-                                <img src="profile-picture.jpg" alt="Anas Asif" class="hero-face">
-                            </div>
-                        </div>
-                        <div class="hero-text">
-                            <div class="hero-tagline">
-                                <span class="welcome-text">welcome to</span>
-                                <h1 class="hero-title cursive">Anu Visuals</h1>
-                            </div>
-                            <h2 class="hero-subtitle">Video Editor • Motion Graphic Designer</h2>
-                            <p class="hero-description">Creative ideas. Clean rhythm. Visuals that carry weight</p>
-                            <div class="hero-buttons">
-                                <a href="#work" class="glass-button primary">
-                                    <i class="fas fa-eye"></i> See My Work
-                                </a>
-                                <a href="#contact" class="glass-button secondary">
-                                    <i class="fas fa-envelope"></i> Get In Touch
-                                </a>
-                            </div>
-                        </div>
+            <div class="hero-content">
+                <div class="hero-image-wrapper glass-card">
+                    <img src="profile-picture.jpg" alt="Anas Asif" class="hero-face">
+                </div>
+                <div class="hero-text">
+                    <span class="welcome-text">welcome to</span>
+                    <h1 class="hero-title cursive">Anu Visuals</h1>
+                    <h2 class="hero-subtitle">Video Editor • Motion Graphic Designer</h2>
+                    <p class="hero-description">Creative ideas. Clean rhythm. Visuals that carry weight.</p>
+                    <div class="hero-buttons">
+                        <a href="#work" class="glass-button primary">
+                            <i class="fas fa-eye"></i> See My Work
+                        </a>
+                        <a href="#contact" class="glass-button secondary">
+                            <i class="fas fa-envelope"></i> Get In Touch
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="work" class="craft-section">
-    <div class="craft-header">
-        <div class="craft-title glass-card">
-            <div class="glass-bend"></div>
-            <div class="glass-face"></div>
-            <div class="glass-edge"></div>
-            <h2>My Craft</h2>
-        </div>
-       
-    </div>
-
-    <div class="craft-subsection">
-        <div class="subsection-header">
-            <h3>Editing</h3>
-        </div>
-
-        <!-- Edit 1 -->
-        <div class="edit-row" data-sync-group="edit1">
-            <!-- BEFORE -->
-            <div class="video-comparison-group raw-video">
-                <div class="comparison-label glass-card">
-                    <span class="label-icon">🎬</span>
-                    <span class="label-text">RAW</span>
+            <div class="section-header">
+                <div class="glass-pill">
+                    <h2>My Craft</h2>
                 </div>
-                <div class="video-container" data-video="edit1raw" data-sync-group="edit1">
-                    <video playsinline preload="metadata">
-                        <source src="videos/craft/raw/edit1raw.mp4" type="video/mp4">
-                        Your browser doesn't support HTML5 video.
-                    </video>
-                    <div class="video-overlay">
-                        <div class="video-hover-indicator">
-                            <span class="hover-pause-icon">⏸</span>
+            </div>
+
+            <div class="craft-subsection">
+                <h3 class="subsection-title">Editing</h3>
+                
+                <div class="edit-row" data-sync-group="edit1">
+                    <div class="video-wrapper glass-card">
+                        <div class="video-tag">FINAL</div>
+                        <div class="video-container">
+                            <video playsinline loop muted>
+                                <source src="videos/craft/final/edit1final.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-progress"><div class="progress-bar"></div></div>
                         </div>
                     </div>
-                    <div class="video-progress">
-                        <div class="video-progress-fill"></div>
-                    </div>
-                    <div class="autoplay-badge">Auto-play</div>
                 </div>
-            </div>
 
-            <!-- AFTER -->
-            <div class="video-comparison-group final-video">
-                <div class="comparison-label glass-card">
-                    <span class="label-icon">✨</span>
-                    <span class="label-text">FINAL</span>
-                </div>
-                <div class="video-container" data-video="edit1final" data-sync-group="edit1">
-                    <video playsinline preload="metadata">
-                        <source src="videos/craft/final/edit1final.mp4" type="video/mp4">
-                        Your browser doesn't support HTML5 video.
-                    </video>
-                    <div class="video-overlay">
-                        <div class="video-hover-indicator">
-                            <span class="hover-pause-icon">⏸</span>
+                <div class="edit-row" data-sync-group="edit2">
+                    <div class="video-wrapper glass-card">
+                        <div class="video-tag">FINAL</div>
+                        <div class="video-container">
+                            <video playsinline loop muted>
+                                <source src="videos/craft/final/edit2final.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-progress"><div class="progress-bar"></div></div>
                         </div>
                     </div>
-                    <div class="video-progress">
-                        <div class="video-progress-fill"></div>
-                    </div>
-                    <div class="autoplay-badge">Auto-play</div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Edit 2 -->
-        <div class="edit-row" data-sync-group="edit2">
-            <!-- BEFORE -->
-            <div class="video-comparison-group raw-video">
-                <div class="comparison-label glass-card">
-                    <span class="label-icon">🎬</span>
-                    <span class="label-text">RAW</span>
-                </div>
-                <div class="video-container" data-video="edit2raw" data-sync-group="edit2">
-                    <video playsinline preload="metadata">
-                        <source src="videos/craft/raw/edit2raw.mp4" type="video/mp4">
-                        Your browser doesn't support HTML5 video.
-                    </video>
-                    <div class="video-overlay">
-                        <div class="video-hover-indicator">
-                            <span class="hover-pause-icon">⏸</span>
+                <div class="edit-row" data-sync-group="edit3">
+                    <div class="video-wrapper glass-card">
+                        <div class="video-tag">FINAL</div>
+                        <div class="video-container">
+                            <video playsinline loop muted>
+                                <source src="videos/craft/final/edit3final.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-progress"><div class="progress-bar"></div></div>
                         </div>
                     </div>
-                    <div class="video-progress">
-                        <div class="video-progress-fill"></div>
-                    </div>
-                    <div class="autoplay-badge">Auto-play</div>
+                </div>
+
+                <div class="gallery-action">
+                    <a href="https://drive.google.com/drive/folders/131W9R9bk4TH_SPBKcdLx3ZF7i3sr7Ggo?usp=sharing" target="_blank" class="glass-button small">
+                        <i class="fas fa-film"></i> View All Edits
+                    </a>
                 </div>
             </div>
 
-            <!-- AFTER -->
-            <div class="video-comparison-group final-video">
-                <div class="comparison-label glass-card">
-                    <span class="label-icon">✨</span>
-                    <span class="label-text">FINAL</span>
+            <div class="craft-subsection">
+                <h3 class="subsection-title">Design</h3>
+                <div class="gallery-grid design-grid">
+                    <div class="gallery-item glass-card">
+                        <img src="images/design/design1.webp" alt="Design 1" loading="lazy">
+                    </div>
+                    <div class="gallery-item glass-card">
+                        <img src="images/design/design2.webp" alt="Design 2" loading="lazy">
+                    </div>
+                    <div class="gallery-item glass-card">
+                        <img src="images/design/design3.webp" alt="Design 3" loading="lazy">
+                    </div>
                 </div>
-                <div class="video-container" data-video="edit2final" data-sync-group="edit2">
-                    <video playsinline preload="metadata">
-                        <source src="videos/craft/final/edit2final.mp4" type="video/mp4">
-                        Your browser doesn't support HTML5 video.
-                    </video>
-                    <div class="video-overlay">
-                        <div class="video-hover-indicator">
-                            <span class="hover-pause-icon">⏸</span>
+                <div class="gallery-action">
+                    <a href="https://drive.google.com/drive/folders/1F3gPzMZDG5vAJhbyop4mXN1p-7t_GDAn?usp=sharing" target="_blank" class="glass-button small">
+                        <i class="fas fa-palette"></i> View All Designs
+                    </a>
+                </div>
+            </div>
+
+            <div class="craft-subsection">
+                <h3 class="subsection-title">Stills</h3>
+                <div class="gallery-grid photo-grid">
+                    <div class="gallery-item glass-card with-caption">
+                        <img src="images/stills/still1.webp" alt="Photo 1" loading="lazy">
+                        <div class="caption">
+                            <strong>Chavvakkad</strong><br>145mm • f/5.6
                         </div>
                     </div>
-                    <div class="video-progress">
-                        <div class="video-progress-fill"></div>
-                    </div>
-                    <div class="autoplay-badge">Auto-play</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Edit 3 -->
-        <div class="edit-row" data-sync-group="edit3">
-            <!-- BEFORE -->
-            <div class="video-comparison-group raw-video">
-                <div class="comparison-label glass-card">
-                    <span class="label-icon">🎬</span>
-                    <span class="label-text">RAW</span>
-                </div>
-                <div class="video-container" data-video="edit3raw" data-sync-group="edit3">
-                    <video playsinline preload="metadata">
-                        <source src="videos/craft/raw/edit3raw.mp4" type="video/mp4">
-                        Your browser doesn't support HTML5 video.
-                    </video>
-                    <div class="video-overlay">
-                        <div class="video-hover-indicator">
-                            <span class="hover-pause-icon">⏸</span>
+                    <div class="gallery-item glass-card with-caption">
+                        <img src="images/stills/still2.webp" alt="Photo 2" loading="lazy">
+                        <div class="caption">
+                            <strong>Thrissur</strong><br>55mm • f/4.5
                         </div>
                     </div>
-                    <div class="video-progress">
-                        <div class="video-progress-fill"></div>
-                    </div>
-                    <div class="autoplay-badge">Auto-play</div>
-                </div>
-            </div>
-
-            <!-- AFTER -->
-            <div class="video-comparison-group final-video">
-                <div class="comparison-label glass-card">
-                    <span class="label-icon">✨</span>
-                    <span class="label-text">FINAL</span>
-                </div>
-                <div class="video-container" data-video="edit3final" data-sync-group="edit3">
-                    <video playsinline preload="metadata">
-                        <source src="videos/craft/final/edit3final.mp4" type="video/mp4">
-                        Your browser doesn't support HTML5 video.
-                    </video>
-                    <div class="video-overlay">
-                        <div class="video-hover-indicator">
-                            <span class="hover-pause-icon">⏸</span>
+                    <div class="gallery-item glass-card with-caption">
+                        <img src="images/stills/still3.webp" alt="Photo 3" loading="lazy">
+                        <div class="caption">
+                            <strong>Portrait</strong><br>55mm • f/5.6
                         </div>
                     </div>
-                    <div class="video-progress">
-                        <div class="video-progress-fill"></div>
-                    </div>
-                    <div class="autoplay-badge">Auto-play</div>
+                </div>
+                <div class="gallery-action">
+                    <a href="https://drive.google.com/drive/folders/1cfQxRk3_lLOZtxgPTCrEJxQMR4-_MO0D?usp=sharing" target="_blank" class="glass-button small">
+                        <i class="fas fa-camera"></i> View All Stills
+                    </a>
                 </div>
             </div>
-        </div>
-        <!-- After the last edit-row in the Editing section -->
-<div class="gallery-action">
-    <a href="https://drive.google.com/drive/folders/131W9R9bk4TH_SPBKcdLx3ZF7i3sr7Ggo?usp=sharing" 
-       target="_blank" 
-       class="glass-button">
-        <i class="fas fa-film"></i> View All Edits
-    </a>
-</div>
-    </div>
-
-   <!-- Design Section -->
-<div class="craft-subsection">
-    <div class="subsection-header">
-        <h3><i class="fas fa-paint-brush"></i> Design</h3>
-        
-    </div>
-    <div class="gallery-grid design-grid">
-        <div class="gallery-item glass-card">
-            <div class="glass-face"></div>
-            <div class="glass-bend"></div>
-            <div class="glass-edge"></div>
-            <div class="image-wrapper">
-                <img src="images/design/design1.webp" alt="Graphic Design Project 1" loading="lazy">
-            </div>
-        </div>
-        <div class="gallery-item glass-card">
-            <div class="glass-face"></div>
-            <div class="glass-bend"></div>
-            <div class="glass-edge"></div>
-            <div class="image-wrapper">
-                <img src="images/design/design2.webp" alt="Graphic Design Project 2" loading="lazy">
-            </div>
-        </div>
-        <div class="gallery-item glass-card">
-            <div class="glass-face"></div>
-            <div class="glass-bend"></div>
-            <div class="glass-edge"></div>
-            <div class="image-wrapper">
-                <img src="images/design/design3.webp" alt="Graphic Design Project 3" loading="lazy">
-            </div>
-        </div>
-    </div>
-  
-<div class="gallery-action">
-    <a href="https://drive.google.com/drive/folders/1F3gPzMZDG5vAJhbyop4mXN1p-7t_GDAn?usp=sharing" 
-       target="_blank" 
-       class="glass-button">
-        <i class="fas fa-palette"></i> View All Designs
-    </a>
-</div>
-</div>
-
-   <!-- Stills Section -->
-<div class="craft-subsection">
-    <div class="subsection-header">
-        <h3><i class="fas fa-camera"></i> Stills</h3>
-    </div>
-    <div class="gallery-grid photo-grid">
-        <!-- Still 1 -->
-        <div class="gallery-item glass-card">
-            <div class="glass-face"></div>
-            <div class="image-wrapper">
-                <img src="images/stills/still1.webp" alt="Chavvakkad, Thrissur" loading="lazy">
-            </div>
-            <div class="item-caption">
-                <p><strong>Chavvakkad, Thrissur</strong><br>
-                Canon EOS M50m2 • 55-200 EF-M<br>
-                145mm • f/5.6 • 1/640s</p>
-            </div>
-        </div>
-        
-        <!-- Still 2 -->
-        <div class="gallery-item glass-card">
-            <div class="glass-face"></div>
-            <div class="image-wrapper">
-                <img src="images/stills/still2.webp" alt="Chavvakkad, Thrissur" loading="lazy">
-            </div>
-            <div class="item-caption">
-                <p><strong>Chavvakkad, Thrissur</strong><br>
-                Canon EOS M50m2 • 55-200 EF-M<br>
-                55mm • f/4.5 • 1/500s</p>
-            </div>
-        </div>
-        
-        <!-- Still 3 -->
-        <div class="gallery-item glass-card">
-            <div class="glass-face"></div>
-            <div class="image-wrapper">
-                <img src="images/stills/still3.webp" alt="Chavvakkad, Thrissur" loading="lazy">
-            </div>
-            <div class="item-caption">
-                <p><strong>Chavvakkad, Thrissur</strong><br>
-                Canon EOS M50m2 • 55-200 EF-M<br>
-                55mm • f/5.6 • 1/800s</p>
-            </div>
-        </div>
-    </div>
-
-<div class="gallery-action">
-    <a href="https://drive.google.com/drive/folders/1cfQxRk3_lLOZtxgPTCrEJxQMR4-_MO0D?usp=sharing" 
-       target="_blank" 
-       class="glass-button">
-        <i class="fas fa-images"></i> View All Stills
-    </a>
-</div>
-</div>
+        </section>
 
         <section id="about" class="about-section">
-            <div class="about-container glass-card large">
-                <div class="glass-bend"></div>
-                <div class="glass-face"></div>
-                <div class="glass-edge"></div>
-                <div class="about-content">
-                    <div class="about-header">
-                        <h2>Hi, I'm Anas Asif</h2>
-                        <p class="about-tagline">Creative Director & Editor</p>
-                    </div>
-                    
-                    <div class="about-text">
-                        <p>I started on a smartphone in 2019 at the age of 12. No film school, No Courses, just trial & error. What began as animation experiments on mobile quickly evolved into a multi-disciplinary obsession with motion graphics, video editing, and visual storytelling. <strong>I don't just "edit videos". I engineer them.</strong></p>
-                        
-                        <p>My workflow is a hybrid of creative and technical precision. From freelancing and doing hobby projects in the UAE to crafting local brand identities in Thrissur & Malappuram, I've spent years refining a style that is distinctly modern and flashy. I mainly specialize in short form, rhythmic, and visually appealing content.</p>
-                        
-                        <p>I believe in being tool-agnostic, and my weapons of choice are : <strong>DaVinci Resolve</strong> for the Editing, VFX, ColorGrading ), <strong>Adobe Photoshop</strong> for Graphic Desgin, And Photo Correction. <strong>Adobe Lightroom</strong> For Still Photo Editing, Skin Correction, Batch Photo Editing ect.</p>
-                    </div>
+            <div class="about-container glass-card large-padding">
+                <div class="about-header">
+                    <h2>Hi, I'm Anas Asif</h2>
+                    <p class="accent-text">Creative Director & Editor</p>
+                </div>
+                
+                <div class="about-text">
+                    <p>I started on a smartphone in 2019 at the age of 12. No film school, just trial & error. What began as animation experiments evolved into a multi-disciplinary obsession. <strong>I don't just "edit videos". I engineer them.</strong></p>
+                    <p>My workflow is a hybrid of creative and technical precision. I specialize in short-form, rhythmic, and visually appealing content using <strong>DaVinci Resolve</strong>, <strong>Photoshop</strong>, and <strong>Lightroom</strong>.</p>
+                </div>
 
-                    <div class="skills-section">
-                        <h3>Skills</h3>
-                        <div class="skills-grid">
-                            <div class="skill-tag">
-                                <i class="fas fa-bolt"></i> Short-form Editing
-                            </div>
-                            <div class="skill-tag">
-                                <i class="fas fa-font"></i> Text Animation
-                            </div>
-                            <div class="skill-tag">
-                                <i class="fas fa-magic"></i> Motion Design
-                            </div>
-                            <div class="skill-tag">
-                                <i class="fas fa-hashtag"></i> Social Strategy
-                            </div>
-                             <div class="skill-tag">
-                            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/davinciresolve.svg" alt="DaVinci Resolve" class="skill-icon"> DaVinci Resolve
-                            </div>
-                            <div class="skill-tag">
-                                <i class="fas fa-video"></i> Cinematography
-                            </div>
-                            <div class="skill-tag">
-                                <i class="fas fa-layer-group"></i> Multi-media Design
-                            </div>
-                            <div class="skill-tag">
-                                <i class="fab fa-instagram"></i> IG Management
-                            </div>
-                            <div class="skill-tag">
-                                <i class="fas fa-eye"></i> Creative Direction
-                            </div>
-                            <div class="skill-tag">
-                                <i class="fas fa-camera"></i> Photography
-                            </div>
-                            <div class="skill-tag">
-                                <i class="fas fa-video"></i> Videography
-                            </div>
-                            <div class="skill-tag">
-                                <i class="fas fa-paint-brush"></i> Graphic Des
-                            </div>
-                            <div class="skill-tag">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" class="skill-icon"> Adobe Photoshop
-                            </div>
-                            <div class="skill-tag">
-                                <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/canva.svg" alt="Canva" class="skill-icon" alt="Canva" class="skill-icon"> Canva
-                            </div>
-                        </div>
+                <div class="skills-wrapper">
+                    <h3>Skills</h3>
+                    <div class="skills-grid">
+                        <span class="skill-tag">Short-form Editing</span>
+                        <span class="skill-tag">Motion Design</span>
+                        <span class="skill-tag">DaVinci Resolve</span>
+                        <span class="skill-tag">Cinematography</span>
+                        <span class="skill-tag">Creative Direction</span>
+                        <span class="skill-tag">Photoshop</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="experience-section">
-            <div class="section-title glass-card">
-                <div class="glass-bend"></div>
-                <div class="glass-face"></div>
-                <div class="glass-edge"></div>
-                <h2>The Journey</h2>
+        <section class="timeline-section">
+            <div class="section-header">
+                <div class="glass-pill"><h2>The Journey</h2></div>
             </div>
-
+            
             <div class="timeline">
+                <div class="timeline-line"></div>
+                
                 <div class="timeline-item">
-                    <div class="timeline-year">2025</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2025</div>
                     <div class="timeline-content glass-card">
-                        <div class="glass-bend"></div>
-                        <div class="glass-face"></div>
-                        <div class="glass-edge"></div>
                         <h3>Video Editor & Visual Designer</h3>
-                        <p class="timeline-location">Oggy Studio, Perumbilavu</p>
-                        <p>Currently driving visual content creation: Motion graphics, professional video editing, graphic design, and videography.</p>
+                        <p class="location">Oggy Studio, Perumbilavu</p>
+                        <p>Driving visual content creation: Motion graphics, editing, and videography.</p>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-year">2024</div>
+                <div class="timeline-item right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2024</div>
                     <div class="timeline-content glass-card">
-                        <div class="glass-bend"></div>
-                        <div class="glass-face"></div>
-                        <div class="glass-edge"></div>
                         <h3>Freelance Expansion</h3>
-                        <p class="timeline-location">Thrissur & Malappuram</p>
-                        <p>Executed freelance commissions for local brands: Ad shoots, poster design, and visual identity work.</p>
+                        <p class="location">Thrissur & Malappuram</p>
+                        <p>Executed freelance commissions for local brands: Ad shoots and identity work.</p>
                     </div>
                 </div>
 
                 <div class="timeline-item">
-                    <div class="timeline-year">2022-23</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2022-23</div>
                     <div class="timeline-content glass-card">
-                        <div class="glass-bend"></div>
-                        <div class="glass-face"></div>
-                        <div class="glass-edge"></div>
                         <h3>International Exposure</h3>
-                        <p class="timeline-location">Dubai, UAE (Freelance)</p>
-                        <p>Took my craft international, handling graphic design commissions and photography projects in Duabi.</p>
+                        <p class="location">Dubai, UAE</p>
+                        <p>Handled graphic design commissions and photography projects in Dubai.</p>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-year">2021</div>
+                <div class="timeline-item right">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-date">2019</div>
                     <div class="timeline-content glass-card">
-                        <div class="glass-bend"></div>
-                        <div class="glass-face"></div>
-                        <div class="glass-edge"></div>
-                        <h3>The Technical Shift</h3>
-                        <p class="timeline-location">Software Mastery</p>
-                        <p>Moved from mobile to desktop. Mastered the Adobe Suite (Premiere, Photoshop), Paint.NET, and eventually DaVinci Resolve.</p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-year">2019</div>
-                    <div class="timeline-content glass-card">
-                        <div class="glass-bend"></div>
-                        <div class="glass-face"></div>
-                        <div class="glass-edge"></div>
                         <h3>Origin Story</h3>
-                        <p class="timeline-location">Self-Taught at Age 12</p>
-                        <p>Started animating on a smartphone. No fancy gear, just raw curiosity and a love for motion.</p>
+                        <p class="location">Self-Taught at Age 12</p>
+                        <p>Started animating on a smartphone. No fancy gear, just raw curiosity.</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="contact-section">
-    <div class="contact-container glass-card large">
-        <div class="glass-bend"></div>
-        <div class="glass-face"></div>
-        <div class="glass-edge"></div>
-        <div class="contact-content">
-            <div class="contact-header">
+            <div class="contact-container glass-card large-padding">
                 <h2>Let's Create Together</h2>
-                <p class="contact-subtitle">Have a project in mind? Get in touch.</p>
-            </div>
-
-            <div class="contact-info">
-                <div class="contact-item glass-card">
-                    <div class="glass-bend"></div>
-                    <div class="glass-face"></div>
-                    <div class="contact-icon">
+                <p>Have a project in mind?</p>
+                
+                <div class="contact-grid">
+                    <a href="mailto:anuvisualmedia12@gmail.com" class="contact-box glass-card">
                         <i class="fas fa-envelope"></i>
-                    </div>
-                    <h3>Email</h3>
-                    <a href="mailto:anuvisualmedia12@gmail.com" class="glass-button">Send Email</a>
-                </div>
-                <div class="contact-item glass-card">
-                    <div class="glass-bend"></div>
-                    <div class="glass-face"></div>
-                    <div class="contact-icon">
+                        <span>Email</span>
+                    </a>
+                    <a href="https://wa.me/918089120708" class="contact-box glass-card">
                         <i class="fab fa-whatsapp"></i>
-                    </div>
-                    <h3>WhatsApp</h3>
-                    <a href="https://wa.me/918089120708" class="glass-button">Message Me</a>
-                </div>
-                <div class="contact-item glass-card">
-                    <div class="glass-bend"></div>
-                    <div class="glass-face"></div>
-                    <div class="contact-icon">
+                        <span>WhatsApp</span>
+                    </a>
+                    <a href="https://www.instagram.com/_4nzx_/" class="contact-box glass-card">
                         <i class="fab fa-instagram"></i>
-                    </div>
-                    <h3>Instagram</h3>
-                    <a href="https://www.instagram.com/_4nzx_/" target="_blank" class="glass-button">Follow</a>
+                        <span>Instagram</span>
+                    </a>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-                <!-- Back to Top Button -->
+        </section>
+
         <button id="backToTop" class="back-to-top glass-button">
-            <i class="fas fa-chevron-up"></i>
+            <i class="fas fa-arrow-up"></i>
         </button>
     </main>
 
     <footer class="glass-footer">
-    <div class="footer-content glass-card">
-        <div class="footer-text">
-            <p>&copy; 2025 Anu Visuals.</p>
-            <p>Creative Director & Editor.</p>
-            
-            <!-- Social Links with Brand Logos -->
-            <div class="footer-social">
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/_4nzx_/" target="_blank" class="social-link instagram" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/AnuVisualss/" target="_blank" class="social-link facebook" title="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                
-                <!-- WhatsApp -->
-                <a href="https://wa.me/918089120708" target="_blank" class="social-link whatsapp" title="WhatsApp">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-                
-                <!-- Email -->
-                <a href="mailto:anuvisualmedia12@gmail.com" class="social-link email" title="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
-            </div>
-            
-            <p class="footer-tagline">Let's create something amazing together</p>
+        <p>&copy; 2025 Anu Visuals. Creative Director & Editor.</p>
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/_4nzx_/"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/918089120708"><i class="fab fa-whatsapp"></i></a>
+            <a href="mailto:anuvisualmedia12@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+    </footer>
+
+    <div id="unifiedLightbox" class="lightbox-overlay">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <video id="lightboxVideo" controls autoplay style="display:none;"></video>
+            <img id="lightboxImage" src="" alt="Full Screen Work" style="display:none;">
         </div>
     </div>
-</footer>
-
-    <svg style="display: none" xmlns="http://www.w3.org/2000/svg">
-        <filter id="glass-blur" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
-            <feTurbulence type="fractalNoise" baseFrequency="0.003 0.007" numOctaves="1" result="turbulence" />
-            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="200" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-    </svg>
 
     <script src="script.js"></script>
 </body>
